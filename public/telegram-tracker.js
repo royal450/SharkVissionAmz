@@ -1,6 +1,6 @@
 // public/telegram-tracker.js
-// Real-time visit + Amazon click tracking
 // Auto-injected by server into every HTML page
+// Tracks: Visits + Affiliate Clicks (Amazon, Flipkart, etc.)
 
 (function() {
   'use strict';
@@ -9,19 +9,72 @@
   const CLICK_API = 'https://sharkmcp.onrender.com/api/track-click';
 
   // ============================================================
-  // ===== AMAZON LINK DETECTION =====
+  // ===== AFFILIATE LINK PATTERNS =====
   // ============================================================
-  const AMAZON_PATTERNS = [
-    /amazon\./i,           // amazon.in, amazon.com, amazon.co.uk
-    /amzn\.to/i,           // amzn.to short
-    /amzn\.in/i,           // amzn.in
-    /amzn\.eu/i,           // amzn.eu
-    /amzn\.asia/i,         // amzn.asia
+  const AFFILIATE_PATTERNS = [
+    // Amazon
+    /amazon\./i,
+    /amzn\.to/i,
+    /amzn\.in/i,
+    /amzn\.eu/i,
+    /amzn\.asia/i,
+    // Flipkart
+    /flipkart\.com/i,
+    /fkrt\.it/i,
+    /fkrt\.co/i,
+    // Myntra
+    /myntra\.com/i,
+    // Ajio
+    /ajio\.com/i,
+    // Meesho
+    /meesho\.com/i,
+    // Snapdeal
+    /snapdeal\.com/i,
+    // Tata Cliq
+    /tatacliq\.com/i,
+    // Nykaa
+    /nykaa\.com/i,
+    // Croma
+    /croma\.com/i,
+    // Reliance Digital
+    /reliancedigital\.in/i,
+    // Vijay Sales
+    /vijaysales\.com/i,
+    // Generic affiliate networks
+    /bit\.ly/i,
+    /tinyurl\.com/i,
+    /cuelinks\.com/i,
+    /earnkaro\.com/i,
+    /earnkaro\.in/i,
+    /inr\.deals/i,
+    /linksredirect\.com/i,
+    // UTM-tracked affiliate
+    /affiliate/i,
+    /referral/i,
   ];
 
-  function isAmazonLink(url) {
+  function isAffiliateLink(url) {
     if (!url) return false;
-    return AMAZON_PATTERNS.some(function(pattern) { return pattern.test(url); });
+    return AFFILIATE_PATTERNS.some(function(pattern) { return pattern.test(url); });
+  }
+
+  function detectAffiliateSource(url) {
+    if (!url) return 'Unknown';
+    var u = url.toLowerCase();
+    if (u.includes('amazon') || u.includes('amzn.')) return 'Amazon';
+    if (u.includes('flipkart') || u.includes('fkrt.')) return 'Flipkart';
+    if (u.includes('myntra')) return 'Myntra';
+    if (u.includes('ajio')) return 'Ajio';
+    if (u.includes('meesho')) return 'Meesho';
+    if (u.includes('snapdeal')) return 'Snapdeal';
+    if (u.includes('tatacliq')) return 'TataCliq';
+    if (u.includes('nykaa')) return 'Nykaa';
+    if (u.includes('croma')) return 'Croma';
+    if (u.includes('reliancedigital')) return 'RelianceDigital';
+    if (u.includes('vijaysales')) return 'VijaySales';
+    if (u.includes('cuelinks')) return 'Cuelinks';
+    if (u.includes('earnkaro')) return 'EarnKaro';
+    return 'Other';
   }
 
   // ============================================================
@@ -31,15 +84,15 @@
   const CLICK_COOLDOWN = 60000; // 1 min
 
   function isDuplicateClick(key) {
-    const last = recentClicks.get(key);
-    const now = Date.now();
+    var last = recentClicks.get(key);
+    var now = Date.now();
     if (last && (now - last) < CLICK_COOLDOWN) return true;
     recentClicks.set(key, now);
     return false;
   }
 
   // ============================================================
-  // ===== AMAZON CLICK TRACKING =====
+  // ===== AFFILIATE CLICK TRACKING =====
   // ============================================================
   document.addEventListener('click', function(e) {
     var link = e.target.closest('a');
@@ -48,17 +101,16 @@
     var href = link.href || '';
     var text = (link.textContent || '').trim().substring(0, 100);
 
-    // ✅ Only Amazon
-    if (!isAmazonLink(href)) return;
+    if (!isAffiliateLink(href)) return;
 
-    // Prevent spam
     var dedupKey = location.pathname + '::' + href;
     if (isDuplicateClick(dedupKey)) {
-      console.log('[Tracker] ⏭️ Duplicate Amazon click ignored');
+      console.log('[Tracker] ⏭️ Duplicate click ignored');
       return;
     }
 
-    console.log('[Tracker] 🛒 Amazon click:', href);
+    var source = detectAffiliateSource(href);
+    console.log('[Tracker] 🛒 Affiliate click:', source, '→', href);
 
     var loc = getCachedLocation();
     var payload = {
@@ -66,6 +118,7 @@
       page_title: getPageTitle(),
       link_url: href,
       link_text: text,
+      affiliate_source: source,
       city: loc.city || 'Unknown',
       country: loc.country || 'Unknown',
       device: detectDevice(),
@@ -74,12 +127,11 @@
       referrer: getReferrer(),
     };
 
-    // Non-blocking send
     try {
       var blob = new Blob([JSON.stringify(payload)], { type: 'application/json' });
       var sent = navigator.sendBeacon(CLICK_API, blob);
       if (!sent) throw new Error('beacon failed');
-      console.log('[Tracker] ✅ Amazon click tracked (beacon)');
+      console.log('[Tracker] ✅ Click tracked (beacon)');
     } catch (err) {
       fetch(CLICK_API, {
         method: 'POST',
@@ -87,10 +139,10 @@
         body: JSON.stringify(payload),
         keepalive: true,
       })
-        .then(function() { console.log('[Tracker] ✅ Amazon click tracked (fetch)'); })
+        .then(function() { console.log('[Tracker] ✅ Click tracked (fetch)'); })
         .catch(function(e) { console.warn('[Tracker] ❌ Click fail:', e.message); });
     }
-  }, true); // ← capture phase — navigation se pehle fire
+  }, true); // capture phase
 
   // ============================================================
   // ===== VISIT TRACKING =====
@@ -163,7 +215,6 @@
   }
 
   async function getLocation() {
-    // Try ipapi.co
     try {
       var res = await fetch('https://ipapi.co/json/', { cache: 'no-store' });
       if (res.ok) {
@@ -182,7 +233,6 @@
       }
     } catch (e) {}
 
-    // Fallback ipwho.is
     try {
       var res2 = await fetch('https://ipwho.is/', { cache: 'no-store' });
       if (res2.ok) {
