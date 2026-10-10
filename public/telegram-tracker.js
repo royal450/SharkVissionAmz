@@ -287,4 +287,4 @@
       console.warn('[Tracker] ❌ Visit fail:', e.message);
     }
   }
-})();
+})(); 
