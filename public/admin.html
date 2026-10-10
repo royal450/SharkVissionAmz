@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SharkMcp File Manager</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: system-ui, -apple-system, sans-serif;
+    background: #0a0e14;
+    color: #e2e8f0;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  /* VS Code style layout */
+  .app {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    height: 100vh;
+  }
+
+  /* Sidebar */
+  .sidebar {
+    background: #0f1419;
+    border-right: 1px solid #1e293b;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .sidebar-header {
+    padding: 1rem;
+    border-bottom: 1px solid #1e293b;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .sidebar-header h2 {
+    font-size: 0.85rem;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .btn-icon {
+    background: transparent;
+    border: none;
+    color: #94a3b8;
+    cursor: pointer;
+    padding: 0.3rem 0.5rem;
+    border-radius: 4px;
+    font-size: 1rem;
+  }
+  .btn-icon:hover { background: #1e293b; color: #38bdf8; }
+  .files-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0.5rem 0;
+  }
+  .file-item {
+    padding: 0.6rem 1rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+    color: #cbd5e1;
+    border-left: 2px solid transparent;
+    transition: all 0.15s;
+  }
+  .file-item:hover { background: #1e293b; }
+  .file-item.active {
+    background: #1e293b;
+    border-left-color: #38bdf8;
+    color: #38bdf8;
+  }
+  .file-item .name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex: 1;
+  }
+  .file-item .del {
+    color: #64748b;
+    font-size: 0.85rem;
+    padding: 0.2rem;
+    opacity: 0;
+    transition: opacity 0.15s;
+  }
+  .file-item:hover .del { opacity: 1; }
+  .file-item .del:hover { color: #ef4444; }
+
+  /* Main area */
+  .main {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .toolbar {
+    padding: 0.75rem 1rem;
+    background: #0f1419;
+    border-bottom: 1px solid #1e293b;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .toolbar input[type="text"] {
+    flex: 1;
+    min-width: 200px;
+    padding: 0.5rem 0.75rem;
+    background: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 6px;
+    color: #e2e8f0;
+    font-size: 0.9rem;
+    font-family: inherit;
+  }
+  .toolbar input[type="text"]:focus {
+    outline: none;
+    border-color: #38bdf8;
+  }
+  .btn {
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    border: none;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.15s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+  .btn-primary {
+    background: linear-gradient(90deg, #38bdf8, #2563eb);
+    color: white;
+  }
+  .btn-primary:hover:not(:disabled) { transform: translateY(-1px); }
+  .btn-secondary {
+    background: #1e293b;
+    color: #e2e8f0;
+    border: 1px solid #334155;
+  }
+  .btn-secondary:hover:not(:disabled) { background: #334155; }
+  .btn-new { background: #059669; color: white; }
+  .btn-new:hover:not(:disabled) { background: #047857; }
+
+  /* Editor */
+  .editor-wrap {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+    background: #0a0e14;
+  }
+  .editor {
+    flex: 1;
+    width: 100%;
+    padding: 1rem;
+    background: #0a0e14;
+    border: none;
+    color: #e2e8f0;
+    font-family: 'Courier New', Consolas, monospace;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    resize: none;
+    outline: none;
+    tab-size: 2;
+  }
+
+  /* Status bar */
+  .status-bar {
+    padding: 0.4rem 1rem;
+    background: #0f1419;
+    border-top: 1px solid #1e293b;
+    font-size: 0.75rem;
+    color: #64748b;
+    display: flex;
+    justify-content: space-between;
+  }
+  .status-bar .live { color: #22c55e; }
+  .status-bar .saving { color: #f59e0b; }
+  .status-bar .error { color: #ef4444; }
+
+  /* Toast */
+  .toast {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    padding: 0.75rem 1.25rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    transform: translateY(100px);
+    opacity: 0;
+    transition: all 0.3s;
+    z-index: 100;
+  }
+  .toast.show { transform: translateY(0); opacity: 1; }
+  .toast.success { background: #065f46; color: #6ee7b7; border: 1px solid #10b981; }
+  .toast.error { background: #7f1d1d; color: #fca5a5; border: 1px solid #ef4444; }
+
+  /* Mobile */
+  @media (max-width: 600px) {
+    .app { grid-template-columns: 1fr; }
+    .sidebar { display: none; }
+    .sidebar.open { display: flex; position: fixed; top: 0; bottom: 0; left: 0; width: 250px; z-index: 50; }
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <h2>📁 Files</h2>
+      <button class="btn-icon" onclick="loadFiles()" title="Refresh">🔄</button>
+    </div>
+    <div class="files-list" id="filesList">
+      <p style="padding:1rem; color:#64748b; font-size:0.85rem;">Loading...</p>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <main class="main">
+    <div class="toolbar">
+      <input type="text" id="filename" placeholder="filename.html" value="new-file.html">
+      <button class="btn btn-new" onclick="newFile()">➕ New</button>
+      <button class="btn btn-primary" onclick="saveFile()" id="saveBtn">💾 Save</button>
+      <button class="btn btn-secondary" onclick="loadFiles()">🔄</button>
+    </div>
+
+    <div class="editor-wrap">
+      <textarea
+        class="editor"
+        id="editor"
+        placeholder="Yahan content likho... (HTML, CSS, JS, JSON — kuch bhi)"
+        spellcheck="false"></textarea>
+    </div>
+
+    <div class="status-bar">
+      <span id="status">Ready</span>
+      <span id="info">0 bytes</span>
+    </div>
+  </main>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ===== Supabase Config =====
+const SUPABASE_URL = "https://wtnkvqkwkpudnaffzkyn.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_UwibQOzWNv7QViF1gCfCGA_36f1Z16h";
+const TABLE = "html_files";
+
+const editor = document.getElementById('editor');
+const filenameInput = document.getElementById('filename');
+const filesList = document.getElementById('filesList');
+const statusEl = document.getElementById('status');
+const infoEl = document.getElementById('info');
+const saveBtn = document.getElementById('saveBtn');
+
+let currentFile = null;
+
+// ===== Toast =====
+function showToast(msg, type = 'success') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast show ' + type;
+  setTimeout(() => t.className = 'toast', 3000);
+}
+
+function setStatus(msg, type = '') {
+  statusEl.textContent = msg;
+  statusEl.className = type;
+}
+
+function updateInfo() {
+  const size = new Blob([editor.value]).size;
+  infoEl.textContent = size + ' bytes';
+}
+
+editor.addEventListener('input', updateInfo);
+
+// ===== Supabase Helpers =====
+async function supabaseRequest(method, path, body = null) {
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/${path}`, {
+    method,
+    headers: {
+      'apikey': SUPABASE_ANON_KEY,
+      'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+      'Content-Type': 'application/json',
+      'Prefer': 'return=representation',
+    },
+    body: body ? JSON.stringify(body) : null,
+  });
+  if (!res.ok) {
+    const err = await res.text();
+    throw new Error(err);
+  }
+  if (res.status === 204) return null;
+  return res.json();
+}
+
+// ===== Save File =====
+async function saveFile() {
+  const filename = filenameInput.value.trim();
+  const content = editor.value;
+
+  if (!filename) return showToast('Filename daalo!', 'error');
+  if (!content) return showToast('Content daalo!', 'error');
+
+  saveBtn.disabled = true;
+  setStatus('Saving...', 'saving');
+
+  try {
+    // Upsert (insert or update)
+    await supabaseRequest('POST', `${TABLE}?on_conflict=filename`, {
+      filename,
+      content,
+      size: new Blob([content]).size,
+      updated_at: new Date().toISOString(),
+    });
+
+    setStatus('✅ Saved', 'live');
+    showToast(`✅ ${filename} saved!`);
+    currentFile = filename;
+    loadFiles();
+  } catch (e) {
+    setStatus('❌ Save fail', 'error');
+    showToast('❌ ' + e.message, 'error');
+  } finally {
+    saveBtn.disabled = false;
+  }
+}
+
+// ===== Load Files List =====
+async function loadFiles() {
+  try {
+    const files = await supabaseRequest(
+      'GET',
+      `${TABLE}?select=filename,size,updated_at&order=updated_at.desc`
+    );
+
+    if (!files || files.length === 0) {
+      filesList.innerHTML = '<p style="padding:1rem; color:#64748b; font-size:0.85rem;">Koi file nahi. New click karo.</p>';
+      return;
+    }
+
+    filesList.innerHTML = files.map(f => `
+      <div class="file-item ${currentFile === f.filename ? 'active' : ''}"
+           onclick="openFile('${f.filename}')">
+        <span class="name">📄 ${f.filename}</span>
+        <span class="del" onclick="event.stopPropagation(); deleteFile('${f.filename}')">✕</span>
+      </div>
+    `).join('');
+  } catch (e) {
+    filesList.innerHTML = `<p style="padding:1rem; color:#ef4444; font-size:0.85rem;">Error: ${e.message}</p>`;
+  }
+}
+
+// ===== Open File =====
+async function openFile(filename) {
+  try {
+    const rows = await supabaseRequest(
+      'GET',
+      `${TABLE}?filename=eq.${encodeURIComponent(filename)}&select=content`
+    );
+    if (rows && rows[0]) {
+      editor.value = rows[0].content;
+      filenameInput.value = filename;
+      currentFile = filename;
+      updateInfo();
+      setStatus('✅ Loaded', 'live');
+      loadFiles(); // refresh active state
+    }
+  } catch (e) {
+    showToast('❌ ' + e.message, 'error');
+  }
+}
+
+// ===== Delete File =====
+async function deleteFile(filename) {
+  if (!confirm(`Delete ${filename}?`)) return;
+  try {
+    await supabaseRequest('DELETE', `${TABLE}?filename=eq.${encodeURIComponent(filename)}`);
+    showToast('🗑️ Deleted');
+    if (currentFile === filename) {
+      editor.value = '';
+      filenameInput.value = '';
+      currentFile = null;
+      updateInfo();
+    }
+    loadFiles();
+  } catch (e) {
+    showToast('❌ ' + e.message, 'error');
+  }
+}
+
+// ===== New File =====
+function newFile() {
+  editor.value = '<!DOCTYPE html>\n<html>\n<head>\n  <title>New Page</title>\n</head>\n<body>\n  <h1>Hello World</h1>\n</body>\n</html>';
+  filenameInput.value = 'new-file.html';
+  currentFile = null;
+  updateInfo();
+  filenameInput.focus();
+  setStatus('New file');
+}
+
+// ===== Init =====
+updateInfo();
+loadFiles();
+</script>
+</body>
+</html>

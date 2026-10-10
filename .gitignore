@@ -1,0 +1,38 @@
+# Node
+node_modules/
+npm-debug.log*
+
+# Env (Render pe hain, GitHub pe nahi)
+.env
+.env.local
+.env.*
+
+# Logs
+*.log
+
+# System
+.DS_Store
+Thumbs.db
+
+# Temp
+temp/
+tmp/
+*.tmp
+
+# Backups
+backups/
+*.zip
+
+# Sync state
+.last_sync
+.last_git_sync
+.last_download
+
+# Editor
+.vscode/
+.idea/
+
+# Python
+__pycache__/
+*.pyc
+.firebase/

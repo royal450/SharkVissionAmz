@@ -1,0 +1,54 @@
+name: Auto Sync from Supabase
+
+on:
+  schedule:
+    - cron: '*/10 * * * *'  # Every 10 min
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Fetch files from Supabase
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+        run: |
+          mkdir -p public
+          echo "📥 Fetching from Supabase..."
+
+          curl -s "$SUPABASE_URL/rest/v1/html_files?select=filename,content" \
+            -H "apikey: $SUPABASE_KEY" \
+            -H "Authorization: Bearer $SUPABASE_KEY" \
+            > /tmp/files.json
+
+          python3 << 'PYEOF'
+          import json, os
+          with open('/tmp/files.json') as f:
+              files = json.load(f)
+          for item in files:
+              path = os.path.join('public', item['filename'])
+              os.makedirs(os.path.dirname(path), exist_ok=True)
+              with open(path, 'w', encoding='utf-8') as fp:
+                  fp.write(item['content'])
+              print(f"  ✅ {item['filename']}")
+          print(f"\n✅ Synced {len(files)} files")
+          PYEOF
+
+      - name: Commit & Push
+        run: |
+          git config user.name "SharkVission Bot"
+          git config user.email "bot@sharkvission.com"
+          git add public/
+          if git diff --cached --quiet; then
+            echo "ℹ️  No changes"
+            exit 0
+          fi
+          git commit -m "🔄 Auto-sync from Supabase — $(date +'%Y-%m-%d %H:%M UTC')"
+          git push
