@@ -1,13 +1,16 @@
 // public/telegram-tracker.js
-// Real-time visit tracking via secure server API
-// 2 second delay, uses Render env vars (token server-side)
+// Real-time visit tracking with location, host URL, and device info
 
 (function() {
   'use strict';
 
-  const TRACKER_API = 'https://sharkmcp.onrender.com/api/track-visit';
+  const cfg = window.SHOPMAZE_CONFIG;
+  if (!cfg || !cfg.telegram || !cfg.telegram.botToken) {
+    console.warn('[Tracker] Telegram config missing.');
+    return;
+  }
 
-  // Session dedup — same page ek session me ek baar
+  // Session dedup — skip if already tracked this page
   const pageKey = 'sm_visit_' + location.pathname;
   if (sessionStorage.getItem(pageKey)) {
     console.log('[Tracker] Already tracked this session.');
@@ -15,9 +18,8 @@
   }
   sessionStorage.setItem(pageKey, '1');
 
-  // ⭐ 2 SECOND DELAY — page load hone do
-  console.log('[Tracker] Will fire in 2 seconds...');
-  setTimeout(sendVisit, 2000);
+  // ⭐ 1 SECOND DELAY (as requested)
+  setTimeout(sendVisit, 1000);
 
   function detectDevice() {
     const ua = navigator.userAgent;
@@ -51,6 +53,7 @@
     catch (e) { return 'Direct'; }
   }
 
+  // Get page title — prefer og:title for accuracy
   function getPageTitle() {
     const ogTitle = document.querySelector('meta[property="og:title"]');
     if (ogTitle && ogTitle.content) return ogTitle.content.substring(0, 140);
@@ -58,8 +61,9 @@
     return 'Untitled';
   }
 
+  // Get real location — with multiple fallbacks
   async function getLocation() {
-    // Try ipapi.co
+    // Try ipapi.co first
     try {
       const res = await fetch('https://ipapi.co/json/', { cache: 'no-store' });
       if (res.ok) {
@@ -71,7 +75,7 @@
           return parts.join(', ');
         }
       }
-    } catch (e) {}
+    } catch (e) { /* continue to fallback */ }
 
     // Fallback: ipwho.is
     try {
@@ -85,47 +89,55 @@
           return parts.join(', ');
         }
       }
-    } catch (e) {}
+    } catch (e) { /* continue */ }
 
     return 'Unknown';
   }
 
   async function sendVisit() {
-    console.log('[Tracker] 🔔 Sending visit...');
-
-    // ✅ FIXED: location variable name change (was overriding window.location)
-    const loc = await getLocation();
+    console.log('[Tracker] Sending visit...');
+    const location = await getLocation();
     const title = getPageTitle();
-    const host = window.location.hostname;    // ✅ Fixed
-    const pageUrl = window.location.href;     // ✅ Fixed
+    const host = location.hostname;
+    const pageUrl = location.href;
     const device = detectDevice();
     const browser = detectBrowser();
     const os = detectOS();
     const referrer = getReferrer();
+    const now = new Date().toLocaleString('en-IN', {
+      timeZone: 'Asia/Kolkata',
+      day: '2-digit', month: 'short', year: 'numeric',
+      hour: '2-digit', minute: '2-digit', hour12: true
+    });
 
-    // Server API ko bhejo — token server side hai
+    const message = 
+      '<b>🔔 New Visit</b>\n\n' +
+      '<b>📄 Page:</b> ' + title + '\n' +
+      '<b>🔗 URL:</b> ' + pageUrl + '\n' +
+      '<b>🌐 Host:</b> ' + host + '\n' +
+      '<b>🌍 Location:</b> ' + location + '\n' +
+      '<b>📱 Device:</b> ' + device + ' / ' + browser + ' / ' + os + '\n' +
+      '<b>↩️ From:</b> ' + referrer + '\n' +
+      '<b>🕐 Time:</b> ' + now;
+
+    const apiUrl = 'https://api.telegram.org/bot' + cfg.telegram.botToken + '/sendMessage';
+
     try {
-      const res = await fetch(TRACKER_API, {
+      const res = await fetch(apiUrl, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          title,
-          url: pageUrl,
-          host,
-          location: loc,                       // ✅ loc use karo
-          device,
-          browser,
-          os,
-          referrer,
-        }),
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({
+          chat_id: cfg.telegram.chatId,
+          text: message,
+          parse_mode: 'HTML',
+          disable_web_page_preview: 'true'
+        })
       });
-
       const data = await res.json();
-
-      if (data.success) {
+      if (data.ok) {
         console.log('[Tracker] ✅ Sent successfully');
       } else {
-        console.warn('[Tracker] ❌ Failed:', data.error);
+        console.warn('[Tracker] ❌ Telegram error:', data.description);
       }
     } catch (e) {
       console.warn('[Tracker] Send failed:', e.message);
