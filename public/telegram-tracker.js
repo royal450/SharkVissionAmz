@@ -1,65 +1,154 @@
 // public/telegram-tracker.js
+// Robust visit + affiliate click tracking
+// Multi-fallback location APIs
 // Auto-injected by server into every HTML page
-// Tracks: Visits + Affiliate Clicks (Amazon, Flipkart, etc.)
 
 (function() {
   'use strict';
 
-  const TRACKER_API = 'https://sharkmcp.onrender.com/api/track-visit';
-  const CLICK_API = 'https://sharkmcp.onrender.com/api/track-click';
+  var TRACKER_API = 'https://sharkmcp.onrender.com/api/track-visit';
+  var CLICK_API = 'https://sharkmcp.onrender.com/api/track-click';
 
   // ============================================================
-  // ===== AFFILIATE LINK PATTERNS =====
+  // ===== LOCATION APIS (Fallback Chain) =====
   // ============================================================
-  const AFFILIATE_PATTERNS = [
-    // Amazon
-    /amazon\./i,
-    /amzn\.to/i,
-    /amzn\.in/i,
-    /amzn\.eu/i,
-    /amzn\.asia/i,
-    // Flipkart
-    /flipkart\.com/i,
-    /fkrt\.it/i,
-    /fkrt\.co/i,
-    // Myntra
-    /myntra\.com/i,
-    // Ajio
-    /ajio\.com/i,
-    // Meesho
-    /meesho\.com/i,
-    // Snapdeal
-    /snapdeal\.com/i,
-    // Tata Cliq
-    /tatacliq\.com/i,
-    // Nykaa
-    /nykaa\.com/i,
-    // Croma
-    /croma\.com/i,
-    // Reliance Digital
-    /reliancedigital\.in/i,
-    // Vijay Sales
-    /vijaysales\.com/i,
-    // Generic affiliate networks
-    /bit\.ly/i,
-    /tinyurl\.com/i,
-    /cuelinks\.com/i,
-    /earnkaro\.com/i,
-    /earnkaro\.in/i,
-    /inr\.deals/i,
-    /linksredirect\.com/i,
-    // UTM-tracked affiliate
-    /affiliate/i,
-    /referral/i,
+  var LOCATION_APIS = [
+    {
+      url: 'https://ipapi.co/json/',
+      parse: function(d) {
+        if (!d || !d.country_name) return null;
+        return {
+          country: d.country_name || 'Unknown',
+          region: d.region || 'Unknown',
+          city: d.city || 'Unknown',
+          postal: d.postal || '',
+          ip: d.ip || '',
+          location: [d.country_name, d.region, d.city].filter(Boolean).join(', '),
+        };
+      }
+    },
+    {
+      url: 'https://ipwho.is/',
+      parse: function(d) {
+        if (!d || !d.country) return null;
+        return {
+          country: d.country || 'Unknown',
+          region: d.region || 'Unknown',
+          city: d.city || 'Unknown',
+          postal: d.postal || '',
+          ip: d.ip || '',
+          location: [d.country, d.region, d.city].filter(Boolean).join(', '),
+        };
+      }
+    },
+    {
+      url: 'https://ipinfo.io/json',
+      parse: function(d) {
+        if (!d || !d.country) return null;
+        var parts = (d.loc || '').split(',');
+        return {
+          country: d.country || 'Unknown',
+          region: d.region || 'Unknown',
+          city: d.city || 'Unknown',
+          postal: d.postal || '',
+          ip: d.ip || '',
+          location: [d.country, d.region, d.city].filter(Boolean).join(', '),
+        };
+      }
+    },
+    {
+      url: 'https://api.ipify.org?format=json',
+      parse: function(d) {
+        if (!d || !d.ip) return null;
+        return {
+          country: 'Unknown',
+          region: 'Unknown',
+          city: 'Unknown',
+          postal: '',
+          ip: d.ip || '',
+          location: 'Unknown',
+        };
+      }
+    },
+  ];
+
+  async function getLocationData() {
+    // Check cache first
+    try {
+      var stored = localStorage.getItem('sm_location_v2');
+      if (stored) {
+        var cached = JSON.parse(stored);
+        // Cache valid for 1 hour
+        if (cached && cached.ts && (Date.now() - cached.ts) < 3600000) {
+          return cached;
+        }
+      }
+    } catch (e) {}
+
+    // Try each API in sequence
+    for (var i = 0; i < LOCATION_APIS.length; i++) {
+      var api = LOCATION_APIS[i];
+      try {
+        var controller = new AbortController();
+        var timeout = setTimeout(function() { controller.abort(); }, 4000);
+
+        var res = await fetch(api.url, {
+          cache: 'no-store',
+          signal: controller.signal,
+        });
+        clearTimeout(timeout);
+
+        if (!res.ok) continue;
+
+        var data = await res.json();
+        var parsed = api.parse(data);
+
+        if (parsed) {
+          parsed.ts = Date.now();
+          try { localStorage.setItem('sm_location_v2', JSON.stringify(parsed)); } catch (e) {}
+          console.log('[Tracker] ✅ Location:', parsed.location, '| IP:', parsed.ip);
+          return parsed;
+        }
+      } catch (e) {
+        console.log('[Tracker] ⚠️ API failed:', api.url, '-', e.message);
+      }
+    }
+
+    // All failed
+    console.log('[Tracker] ❌ All location APIs failed');
+    return {
+      country: 'Unknown',
+      region: 'Unknown',
+      city: 'Unknown',
+      postal: '',
+      ip: '',
+      location: 'Unknown',
+      ts: Date.now(),
+    };
+  }
+
+  // ============================================================
+  // ===== AFFILIATE LINK DETECTION =====
+  // ============================================================
+  var AFFILIATE_PATTERNS = [
+    /amazon\./i, /amzn\.to/i, /amzn\.in/i, /amzn\.eu/i, /amzn\.asia/i,
+    /flipkart\.com/i, /fkrt\.it/i, /fkrt\.co/i,
+    /myntra\.com/i, /ajio\.com/i, /meesho\.com/i,
+    /snapdeal\.com/i, /tatacliq\.com/i, /nykaa\.com/i,
+    /croma\.com/i, /reliancedigital\.in/i, /vijaysales\.com/i,
+    /bit\.ly/i, /tinyurl\.com/i,
+    /cuelinks\.com/i, /earnkaro\.com/i, /earnkaro\.in/i,
+    /inr\.deals/i, /linksredirect\.com/i,
+    /affiliate/i, /referral/i,
   ];
 
   function isAffiliateLink(url) {
     if (!url) return false;
-    return AFFILIATE_PATTERNS.some(function(pattern) { return pattern.test(url); });
+    return AFFILIATE_PATTERNS.some(function(p) { return p.test(url); });
   }
 
   function detectAffiliateSource(url) {
-    if (!url) return 'Unknown';
+    if (!url) return 'Other';
     var u = url.toLowerCase();
     if (u.includes('amazon') || u.includes('amzn.')) return 'Amazon';
     if (u.includes('flipkart') || u.includes('fkrt.')) return 'Flipkart';
@@ -78,98 +167,8 @@
   }
 
   // ============================================================
-  // ===== DUPLICATE CLICK PREVENTION =====
+  // ===== DEVICE / OS / BROWSER DETECTORS =====
   // ============================================================
-  const recentClicks = new Map();
-  const CLICK_COOLDOWN = 60000; // 1 min
-
-  function isDuplicateClick(key) {
-    var last = recentClicks.get(key);
-    var now = Date.now();
-    if (last && (now - last) < CLICK_COOLDOWN) return true;
-    recentClicks.set(key, now);
-    return false;
-  }
-
-  // ============================================================
-  // ===== AFFILIATE CLICK TRACKING =====
-  // ============================================================
-  document.addEventListener('click', function(e) {
-    var link = e.target.closest('a');
-    if (!link) return;
-
-    var href = link.href || '';
-    var text = (link.textContent || '').trim().substring(0, 100);
-
-    if (!isAffiliateLink(href)) return;
-
-    var dedupKey = location.pathname + '::' + href;
-    if (isDuplicateClick(dedupKey)) {
-      console.log('[Tracker] ⏭️ Duplicate click ignored');
-      return;
-    }
-
-    var source = detectAffiliateSource(href);
-    console.log('[Tracker] 🛒 Affiliate click:', source, '→', href);
-
-    var loc = getCachedLocation();
-    var payload = {
-      page_path: location.pathname,
-      page_title: getPageTitle(),
-      link_url: href,
-      link_text: text,
-      affiliate_source: source,
-      city: loc.city || 'Unknown',
-      country: loc.country || 'Unknown',
-      device: detectDevice(),
-      browser: detectBrowser(),
-      os: detectOS(),
-      referrer: getReferrer(),
-    };
-
-    try {
-      var blob = new Blob([JSON.stringify(payload)], { type: 'application/json' });
-      var sent = navigator.sendBeacon(CLICK_API, blob);
-      if (!sent) throw new Error('beacon failed');
-      console.log('[Tracker] ✅ Click tracked (beacon)');
-    } catch (err) {
-      fetch(CLICK_API, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-        keepalive: true,
-      })
-        .then(function() { console.log('[Tracker] ✅ Click tracked (fetch)'); })
-        .catch(function(e) { console.warn('[Tracker] ❌ Click fail:', e.message); });
-    }
-  }, true); // capture phase
-
-  // ============================================================
-  // ===== VISIT TRACKING =====
-  // ============================================================
-  var pageKey = 'sm_visit_' + location.pathname;
-  if (!sessionStorage.getItem(pageKey)) {
-    sessionStorage.setItem(pageKey, '1');
-    setTimeout(sendVisit, 1000);
-  }
-
-  // ============================================================
-  // ===== HELPERS =====
-  // ============================================================
-  var cachedLocation = null;
-
-  function getCachedLocation() {
-    if (cachedLocation) return cachedLocation;
-    try {
-      var stored = localStorage.getItem('sm_location');
-      if (stored) {
-        cachedLocation = JSON.parse(stored);
-        return cachedLocation;
-      }
-    } catch (e) {}
-    return { city: 'Unknown', country: 'Unknown' };
-  }
-
   function detectDevice() {
     var ua = navigator.userAgent;
     if (/iphone/i.test(ua)) return 'iPhone';
@@ -214,49 +213,26 @@
     return 'Untitled';
   }
 
-  async function getLocation() {
-    try {
-      var res = await fetch('https://ipapi.co/json/', { cache: 'no-store' });
-      if (res.ok) {
-        var data = await res.json();
-        if (data.country_name) {
-          var loc = {
-            country: data.country_name || 'Unknown',
-            city: data.city || 'Unknown',
-            region: data.region || 'Unknown',
-            location: [data.country_name, data.region, data.city].filter(Boolean).join(', '),
-          };
-          try { localStorage.setItem('sm_location', JSON.stringify(loc)); } catch (e) {}
-          cachedLocation = loc;
-          return loc;
-        }
-      }
-    } catch (e) {}
+  // ============================================================
+  // ===== DUPLICATE CLICK PREVENTION =====
+  // ============================================================
+  var recentClicks = {};
+  var CLICK_COOLDOWN = 30000; // 30 sec
 
-    try {
-      var res2 = await fetch('https://ipwho.is/', { cache: 'no-store' });
-      if (res2.ok) {
-        var data2 = await res2.json();
-        if (data2.country) {
-          var loc2 = {
-            country: data2.country || 'Unknown',
-            city: data2.city || 'Unknown',
-            region: data2.region || 'Unknown',
-            location: [data2.country, data2.region, data2.city].filter(Boolean).join(', '),
-          };
-          try { localStorage.setItem('sm_location', JSON.stringify(loc2)); } catch (e) {}
-          cachedLocation = loc2;
-          return loc2;
-        }
-      }
-    } catch (e) {}
-
-    return { country: 'Unknown', city: 'Unknown', region: 'Unknown', location: 'Unknown' };
+  function isDuplicateClick(key) {
+    var now = Date.now();
+    var last = recentClicks[key];
+    if (last && (now - last) < CLICK_COOLDOWN) return true;
+    recentClicks[key] = now;
+    return false;
   }
 
+  // ============================================================
+  // ===== SEND VISIT (2 sec after page load) =====
+  // ============================================================
   async function sendVisit() {
     console.log('[Tracker] 📤 Sending visit...');
-    var loc = await getLocation();
+    var loc = await getLocationData();
 
     var payload = {
       title: getPageTitle(),
@@ -265,6 +241,9 @@
       location: loc.location,
       city: loc.city,
       country: loc.country,
+      region: loc.region,
+      postal: loc.postal,
+      client_ip: loc.ip,
       device: detectDevice(),
       browser: detectBrowser(),
       os: detectOS(),
@@ -279,7 +258,7 @@
       });
       var data = await res.json();
       if (data.success) {
-        console.log('[Tracker] ✅ Visit tracked');
+        console.log('[Tracker] ✅ Visit tracked:', loc.city, loc.country);
       } else {
         console.warn('[Tracker] ⚠️', data.error);
       }
@@ -287,4 +266,74 @@
       console.warn('[Tracker] ❌ Visit fail:', e.message);
     }
   }
-})(); 
+
+  // ============================================================
+  // ===== VISIT TRIGGER (2 sec after load) =====
+  // ============================================================
+  var pageKey = 'sm_visit_v2_' + location.pathname;
+  if (!sessionStorage.getItem(pageKey)) {
+    sessionStorage.setItem(pageKey, '1');
+    setTimeout(sendVisit, 2000);
+  }
+
+  // ============================================================
+  // ===== CLICK TRACKING (capture phase) =====
+  // ============================================================
+  document.addEventListener('click', async function(e) {
+    var link = e.target.closest('a');
+    if (!link) return;
+
+    var href = link.href || '';
+    var text = (link.textContent || '').trim().substring(0, 100);
+
+    // ✅ Only affiliate links
+    if (!isAffiliateLink(href)) return;
+
+    var dedupKey = location.pathname + '::' + href;
+    if (isDuplicateClick(dedupKey)) {
+      console.log('[Tracker] ⏭️ Duplicate click ignored');
+      return;
+    }
+
+    var source = detectAffiliateSource(href);
+    console.log('[Tracker] 🛒 Click:', source, '→', href);
+
+    // Get location (from cache if available)
+    var loc = await getLocationData();
+
+    var payload = {
+      page_path: location.pathname,
+      page_title: getPageTitle(),
+      link_url: href,
+      link_text: text,
+      affiliate_source: source,
+      city: loc.city || 'Unknown',
+      country: loc.country || 'Unknown',
+      region: loc.region || 'Unknown',
+      postal: loc.postal || '',
+      client_ip: loc.ip || '',
+      device: detectDevice(),
+      browser: detectBrowser(),
+      os: detectOS(),
+      referrer: getReferrer(),
+    };
+
+    // Non-blocking send
+    try {
+      var blob = new Blob([JSON.stringify(payload)], { type: 'application/json' });
+      var sent = navigator.sendBeacon(CLICK_API, blob);
+      if (!sent) throw new Error('beacon failed');
+      console.log('[Tracker] ✅ Click tracked:', source);
+    } catch (err) {
+      fetch(CLICK_API, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+        keepalive: true,
+      })
+        .then(function() { console.log('[Tracker] ✅ Click tracked (fetch)'); })
+        .catch(function(e) { console.warn('[Tracker] ❌ Click fail:', e.message); });
+    }
+  }, true);
+
+})();
