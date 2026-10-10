@@ -36,3 +36,8 @@ backups/
 __pycache__/
 *.pyc
 .firebase/
+.last_sync
+sync.log
+.last_sync
+sync.log
+*.log
