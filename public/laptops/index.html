@@ -53,25 +53,6 @@
       background: #f3f4f6;
       color: #111;
     }
-    .menu-btn {
-      width: 42px; height: 42px;
-      background: #f5f5f7;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
-    .menu-btn .bar {
-      display: block; width: 20px; height: 2px;
-      background: #111; border-radius: 2px;
-      position: absolute; left: 50%; transform: translateX(-50%);
-    }
-    .menu-btn .bar:nth-child(1) { top: 13px; }
-    .menu-btn .bar:nth-child(2) { top: 20px; }
-    .menu-btn .bar:nth-child(3) { top: 27px; }
 
     /* WRAP */
     .wrap { max-width: 900px; margin: 0 auto; padding: 0 24px; }
@@ -93,18 +74,18 @@
       margin-bottom: 20px;
     }
     .page-hero h1 {
-      font-size: 34px;
+      font-size: 32px;
       font-weight: 800;
-      letter-spacing: -0.8px;
+      letter-spacing: -0.7px;
       line-height: 1.25;
       margin-bottom: 14px;
       color: #111;
     }
-    .page-hero h1 .hl { color: #6366f1; }
+    .page-hero h1 .hl { color: #4f46e5; }
     .page-hero .sub {
       font-size: 16px;
       color: #4b5563;
-      max-width: 640px;
+      max-width: 620px;
       margin: 0 auto 14px;
       line-height: 1.65;
     }
@@ -119,19 +100,19 @@
 
     /* TIP BOX */
     .tip-box {
-      background: #eff6ff;
-      border-left: 4px solid #3b82f6;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
       border-radius: 12px;
       padding: 20px 24px;
       margin: 36px 0 8px;
     }
     .tip-box h3 {
-      font-size: 15.5px;
+      font-size: 15px;
       font-weight: 700;
-      color: #1e40af;
+      color: #1e293b;
       margin-bottom: 6px;
     }
-    .tip-box p { font-size: 14.5px; color: #1e3a5f; line-height: 1.65; }
+    .tip-box p { font-size: 14.5px; color: #475569; line-height: 1.65; }
 
     /* SECTION */
     .section { padding: 40px 0 8px; }
@@ -144,34 +125,44 @@
       margin-bottom: 8px;
     }
     .section-title {
-      font-size: 24px;
+      font-size: 22px;
       font-weight: 800;
       letter-spacing: -0.4px;
       color: #111;
       margin-bottom: 22px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
     }
 
     /* QUICK PICKS */
     .picks-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 16px;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 18px;
     }
     .pick-card {
       background: #fff;
       border: 1.5px solid #e5e7eb;
-      border-radius: 16px;
-      padding: 22px 20px;
+      border-radius: 14px;
+      overflow: hidden;
       transition: 0.25s;
       display: flex;
       flex-direction: column;
     }
     .pick-card:hover {
-      border-color: #111;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.07);
+      border-color: #d1d5db;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+    }
+    .pick-img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      background: #f1f5f9;
+      display: block;
+    }
+    .pick-body {
+      padding: 18px 18px 20px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
     }
     .badge {
       display: inline-block;
@@ -179,7 +170,7 @@
       font-weight: 700;
       padding: 4px 10px;
       border-radius: 6px;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       text-transform: uppercase;
       letter-spacing: 0.3px;
       width: fit-content;
@@ -190,7 +181,7 @@
     .badge-pink { background: #fce7f3; color: #9d174d; }
     .badge-orange { background: #ffedd5; color: #9a3412; }
     .pick-card h3 {
-      font-size: 16px;
+      font-size: 15.5px;
       font-weight: 700;
       color: #111;
       margin-bottom: 6px;
@@ -199,38 +190,56 @@
     .pick-card .specs {
       font-size: 13px;
       color: #6b7280;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
       line-height: 1.5;
       flex-grow: 1;
     }
     .pick-card .price {
-      font-size: 22px;
+      font-size: 20px;
       font-weight: 800;
       color: #111;
-      margin-bottom: 14px;
-      letter-spacing: -0.5px;
+      margin-bottom: 12px;
+      letter-spacing: -0.4px;
+    }
+    .btn-row {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
     }
     .btn-amazon {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 6px;
       background: #eab308;
       color: #111;
       font-weight: 700;
-      font-size: 13.5px;
-      padding: 11px 18px;
-      border-radius: 9px;
+      font-size: 13px;
+      padding: 10px 16px;
+      border-radius: 8px;
       transition: 0.2s;
-      width: 100%;
       text-align: center;
     }
     .btn-amazon:hover { background: #ca8a04; }
+    .btn-view-img {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #f1f5f9;
+      color: #374151;
+      font-weight: 600;
+      font-size: 12.5px;
+      padding: 9px 14px;
+      border-radius: 8px;
+      transition: 0.2s;
+      text-align: center;
+      border: 1px solid #e2e8f0;
+    }
+    .btn-view-img:hover { background: #e2e8f0; }
 
     /* TABLE */
     .table-wrap {
       overflow-x: auto;
-      border-radius: 14px;
+      border-radius: 12px;
       border: 1.5px solid #e5e7eb;
       margin-bottom: 10px;
     }
@@ -243,14 +252,14 @@
     th {
       background: #f8fafc;
       text-align: left;
-      padding: 13px 14px;
+      padding: 12px 14px;
       font-weight: 600;
       color: #475569;
       border-bottom: 1px solid #e5e7eb;
       white-space: nowrap;
     }
     td {
-      padding: 13px 14px;
+      padding: 12px 14px;
       border-bottom: 1px solid #f1f5f9;
       color: #374151;
     }
@@ -272,12 +281,26 @@
     .review-card {
       background: #fff;
       border: 1.5px solid #e5e7eb;
-      border-radius: 16px;
-      padding: 28px 26px;
-      margin-bottom: 22px;
+      border-radius: 14px;
+      padding: 0;
+      margin-bottom: 24px;
+      overflow: hidden;
       transition: 0.25s;
     }
     .review-card:hover { border-color: #d1d5db; }
+    .review-img-wrap {
+      width: 100%;
+      height: 200px;
+      background: #f1f5f9;
+      position: relative;
+      overflow: hidden;
+    }
+    .review-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .review-content { padding: 24px 24px 26px; }
     .review-top {
       display: flex;
       align-items: center;
@@ -286,115 +309,132 @@
       flex-wrap: wrap;
     }
     .review-card h3 {
-      font-size: 18px;
+      font-size: 17px;
       font-weight: 800;
       color: #111;
       letter-spacing: -0.3px;
     }
     .rating {
-      font-size: 13.5px;
+      font-size: 13px;
       color: #6b7280;
       margin: 6px 0 12px;
     }
     .review-desc {
-      font-size: 15px;
+      font-size: 14.5px;
       color: #374151;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
       line-height: 1.7;
     }
     .specs-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 8px 28px;
-      font-size: 14px;
-      margin-bottom: 20px;
+      gap: 7px 28px;
+      font-size: 13.5px;
+      margin-bottom: 18px;
       color: #374151;
     }
     .specs-grid span { color: #6b7280; }
     .pros-cons {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 14px;
-      margin-bottom: 20px;
+      gap: 12px;
+      margin-bottom: 18px;
     }
     .pros, .cons {
-      border-radius: 12px;
-      padding: 16px 18px;
+      border-radius: 10px;
+      padding: 14px 16px;
     }
     .pros { background: #ecfdf5; }
-    .cons { background: #fef2f2; }
-    .pros h4 { color: #065f46; font-size: 13.5px; font-weight: 700; margin-bottom: 8px; }
-    .cons h4 { color: #991b1b; font-size: 13.5px; font-weight: 700; margin-bottom: 8px; }
-    .pros ul, .cons ul { list-style: none; font-size: 13.5px; }
-    .pros li { margin-bottom: 5px; color: #064e3b; }
-    .cons li { margin-bottom: 5px; color: #7f1d1d; }
-    .pros li::before { content: "✓ "; font-weight: 700; color: #059669; }
-    .cons li::before { content: "✗ "; font-weight: 700; color: #dc2626; }
+    .cons { background: #f1f5f9; }
+    .pros h4 { color: #065f46; font-size: 13px; font-weight: 700; margin-bottom: 7px; }
+    .cons h4 { color: #64748b; font-size: 13px; font-weight: 700; margin-bottom: 7px; }
+    .pros ul, .cons ul { list-style: none; font-size: 13px; }
+    .pros li { margin-bottom: 4px; color: #064e3b; }
+    .cons li { margin-bottom: 4px; color: #64748b; }
+    .pros li::before { content: "+ "; font-weight: 700; color: #059669; }
+    .cons li::before { content: "- "; font-weight: 700; color: #94a3b8; }
+    .btn-row-review {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
     .btn-amazon-sm {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
       background: #eab308;
       color: #111;
       font-weight: 700;
-      font-size: 13.5px;
-      padding: 11px 22px;
-      border-radius: 9px;
+      font-size: 13px;
+      padding: 10px 18px;
+      border-radius: 8px;
       transition: 0.2s;
     }
     .btn-amazon-sm:hover { background: #ca8a04; }
+    .btn-view-sm {
+      display: inline-flex;
+      align-items: center;
+      background: #f1f5f9;
+      color: #374151;
+      font-weight: 600;
+      font-size: 13px;
+      padding: 10px 16px;
+      border-radius: 8px;
+      border: 1px solid #e2e8f0;
+      transition: 0.2s;
+    }
+    .btn-view-sm:hover { background: #e2e8f0; }
 
     /* BUYING GUIDE */
     .guide-box {
       background: #0f172a;
       color: #e2e8f0;
-      border-radius: 16px;
-      padding: 32px 28px;
+      border-radius: 14px;
+      padding: 28px 26px;
       margin: 40px 0 16px;
     }
     .guide-box h3 {
-      font-size: 18px;
+      font-size: 17px;
       font-weight: 800;
       color: #fff;
-      margin-bottom: 22px;
+      margin-bottom: 20px;
       letter-spacing: -0.3px;
     }
     .guide-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 22px;
+      gap: 20px;
     }
     .guide-item h4 {
       color: #93c5fd;
-      font-size: 13.5px;
+      font-size: 13px;
       font-weight: 700;
-      margin-bottom: 6px;
+      margin-bottom: 5px;
     }
-    .guide-item p { font-size: 14px; color: #cbd5e1; line-height: 1.6; }
+    .guide-item p { font-size: 13.5px; color: #cbd5e1; line-height: 1.6; }
 
     /* FAQ */
-    .faq-list { display: flex; flex-direction: column; gap: 12px; }
+    .faq-list { display: flex; flex-direction: column; gap: 10px; }
     .faq-item {
       background: #fff;
       border: 1.5px solid #e5e7eb;
-      border-radius: 14px;
+      border-radius: 12px;
       overflow: hidden;
-      transition: 0.3s;
+      transition: 0.25s;
     }
-    .faq-item:hover { border-color: #111; }
+    .faq-item:hover { border-color: #cbd5e1; }
     .faq-item[open] {
-      border-color: #111;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.07);
+      border-color: #94a3b8;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.05);
     }
     .faq-item summary {
       list-style: none;
       cursor: pointer;
-      padding: 18px 22px;
+      padding: 16px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 16px;
-      font-size: 15.5px;
+      gap: 14px;
+      font-size: 15px;
       font-weight: 700;
       color: #111;
       user-select: none;
@@ -402,12 +442,11 @@
     .faq-item summary::-webkit-details-marker { display: none; }
     .faq-item summary::after {
       content: "+";
-      font-size: 22px;
+      font-size: 20px;
       font-weight: 400;
       color: #9ca3af;
       flex-shrink: 0;
-      transition: 0.3s;
-      width: 24px;
+      width: 22px;
       text-align: center;
     }
     .faq-item[open] summary::after {
@@ -419,43 +458,43 @@
       border-bottom: 1px solid #f0f0f0;
     }
     .faq-answer {
-      padding: 16px 22px 20px;
-      font-size: 14.5px;
+      padding: 14px 20px 18px;
+      font-size: 14px;
       color: #4b5563;
       line-height: 1.75;
     }
 
     /* CTA */
     .cta-box {
-      background: #2563eb;
+      background: #1e40af;
       color: #fff;
-      border-radius: 16px;
-      padding: 40px 28px;
+      border-radius: 14px;
+      padding: 36px 26px;
       text-align: center;
-      margin: 48px 0 20px;
+      margin: 44px 0 20px;
     }
     .cta-box h3 {
-      font-size: 22px;
+      font-size: 20px;
       font-weight: 800;
-      margin-bottom: 10px;
-      letter-spacing: -0.4px;
+      margin-bottom: 8px;
+      letter-spacing: -0.3px;
     }
     .cta-box p {
-      font-size: 15px;
+      font-size: 14.5px;
       opacity: 0.9;
-      margin-bottom: 22px;
-      max-width: 480px;
+      margin-bottom: 20px;
+      max-width: 460px;
       margin-left: auto;
       margin-right: auto;
     }
     .btn-white {
       display: inline-block;
       background: #fff;
-      color: #2563eb;
+      color: #1e40af;
       font-weight: 700;
-      padding: 13px 28px;
-      border-radius: 9px;
-      font-size: 15px;
+      padding: 12px 26px;
+      border-radius: 8px;
+      font-size: 14.5px;
       transition: 0.2s;
     }
     .btn-white:hover { background: #f0f4ff; }
@@ -464,7 +503,7 @@
     .footer {
       background: #0f172a;
       color: #94a3b8;
-      padding: 56px 24px 32px;
+      padding: 52px 24px 28px;
       margin-top: 40px;
     }
     .footer-inner {
@@ -472,84 +511,65 @@
       margin: 0 auto;
       display: grid;
       grid-template-columns: 1.4fr 1fr 1fr 1fr;
-      gap: 40px;
+      gap: 36px;
     }
     .footer-brand .footer-logo {
-      font-size: 20px;
+      font-size: 19px;
       font-weight: 900;
       color: #fff;
-      margin-bottom: 12px;
-      letter-spacing: -0.5px;
+      margin-bottom: 10px;
+      letter-spacing: -0.4px;
     }
     .footer-brand .footer-logo span { color: #eab308; }
     .footer-brand p {
-      font-size: 14px;
+      font-size: 13.5px;
       line-height: 1.65;
       color: #94a3b8;
-      max-width: 260px;
+      max-width: 250px;
     }
     .footer-col h4 {
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 700;
       color: #fff;
       letter-spacing: 0.8px;
       text-transform: uppercase;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
     .footer-col a {
       display: block;
-      font-size: 14px;
+      font-size: 13.5px;
       color: #94a3b8;
-      margin-bottom: 10px;
+      margin-bottom: 9px;
       transition: 0.2s;
     }
     .footer-col a:hover { color: #fff; }
     .footer-bottom {
       max-width: 1100px;
-      margin: 40px auto 0;
-      padding-top: 24px;
+      margin: 36px auto 0;
+      padding-top: 22px;
       border-top: 1px solid #1e293b;
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
       gap: 12px;
-      font-size: 13px;
+      font-size: 12.5px;
     }
     .footer-bottom .disclosure {
       color: #64748b;
-      font-size: 12.5px;
-      max-width: 520px;
+      font-size: 12px;
+      max-width: 500px;
       line-height: 1.5;
     }
-
-    /* WHATSAPP FLOAT */
-    .wa-float {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      width: 56px;
-      height: 56px;
-      background: #25d366;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 4px 16px rgba(37,211,102,0.4);
-      z-index: 99;
-      transition: 0.2s;
-    }
-    .wa-float:hover { transform: scale(1.08); }
-    .wa-float svg { width: 28px; height: 28px; fill: #fff; }
 
     /* RESPONSIVE */
     @media (max-width: 768px) {
       .nav-links { display: none; }
-      .menu-btn { display: flex; }
-      .page-hero h1 { font-size: 26px; }
+      .page-hero h1 { font-size: 24px; }
       .pros-cons, .guide-grid, .specs-grid { grid-template-columns: 1fr; }
       .footer-inner { grid-template-columns: 1fr 1fr; gap: 28px; }
       .picks-grid { grid-template-columns: 1fr; }
+      .review-img-wrap { height: 180px; }
     }
     @media (max-width: 480px) {
       .footer-inner { grid-template-columns: 1fr; }
@@ -564,7 +584,7 @@
 <body>
 
   <!-- HEADER -->
-  <div class="header" id="header">
+  <div class="header">
     <div class="header-inner">
       <a href="https://shopmaze.web.app/" class="logo">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 100" class="logo-svg">
@@ -588,9 +608,6 @@
         <a href="https://shopmaze.web.app/smartwatches">Smartwatches</a>
         <a href="mailto:sarkvission@gmail.com" style="font-weight:600;">Support</a>
       </nav>
-      <button class="menu-btn" id="menuBtn" aria-label="Menu">
-        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
-      </button>
     </div>
   </div>
 
@@ -601,11 +618,11 @@
       <h1>Best Laptops Under <span class="hl">₹50,000</span> for Students in India (2026)</h1>
       <p class="sub">
         Shortlisting current options after checking specs, real user feedback and value for money. 
-        Yeh rahi Top 5 picks jo online classes, MS Office, browsing aur daily college use ke liye best hain.
+        Top 5 picks for online classes, MS Office, browsing and daily college use.
       </p>
       <div class="page-meta">
-        <span>⏱ 6 min read</span>
-        <span>👤 By Royal Dev</span>
+        <span>6 min read</span>
+        <span>By Royal Dev</span>
       </div>
     </div>
   </div>
@@ -614,58 +631,87 @@
 
     <!-- TIP BOX -->
     <div class="tip-box">
-      <h3>💡 Kya ₹50,000 mein students ke liye accha laptop mil sakta hai?</h3>
+      <h3>Can you get a good student laptop under ₹50,000?</h3>
       <p>
-        Haan, bilkul. Is budget mein aapko 8GB RAM + 512GB SSD + Full HD display wale solid options mil jaate hain 
-        jo online classes, MS Office, Zoom, browsing aur light multitasking ke liye kaafi hain. 
-        Heavy gaming ya video editing ke liye yeh range thodi weak padegi.
+        Yes. In this budget you get 8GB RAM + 512GB SSD + Full HD display options that handle online classes, 
+        MS Office, Zoom, browsing and light multitasking well. Heavy gaming or video editing is not ideal in this range.
       </p>
     </div>
 
     <!-- TOP 5 QUICK PICKS -->
     <section class="section">
       <div class="section-label">Quick Picks</div>
-      <h2 class="section-title">🏆 Top 5 Laptops Under ₹50,000</h2>
+      <h2 class="section-title">Top 5 Laptops Under ₹50,000</h2>
       <div class="picks-grid">
 
         <div class="pick-card">
-          <span class="badge badge-green">Best Overall</span>
-          <h3>Acer Aspire Lite AL15-41</h3>
-          <p class="specs">Ryzen 3-5400U · 8GB · 512GB SSD · Metal Body · Office 2024 + M365</p>
-          <div class="price">₹43,800</div>
-          <a href="https://link.amazon/B07cCe4ZB" class="btn-amazon" target="_blank" rel="sponsored nofollow">View on Amazon →</a>
+          <img class="pick-img" src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=600&h=400&fit=crop" alt="Acer Aspire Lite laptop">
+          <div class="pick-body">
+            <span class="badge badge-green">Best Overall</span>
+            <h3>Acer Aspire Lite AL15-41</h3>
+            <p class="specs">Ryzen 3-5400U · 8GB · 512GB SSD · Metal Body · Office 2024</p>
+            <div class="price">₹43,800</div>
+            <div class="btn-row">
+              <a href="https://link.amazon/B07cCe4ZB" class="btn-amazon" target="_blank" rel="sponsored nofollow">Check Price on Amazon</a>
+              <a href="https://link.amazon/B07cCe4ZB" class="btn-view-img" target="_blank" rel="sponsored nofollow">View Real Image on Amazon</a>
+            </div>
+          </div>
         </div>
 
         <div class="pick-card">
-          <span class="badge badge-purple">Best Value</span>
-          <h3>Lenovo V15 G4</h3>
-          <p class="specs">Athlon Silver 7120U · 8GB DDR5 · 512GB SSD · 15.6" FHD · 1 Year Warranty</p>
-          <div class="price">₹46,999</div>
-          <a href="https://link.amazon/B0aHD7pWu" class="btn-amazon" target="_blank" rel="sponsored nofollow">View on Amazon →</a>
+          <img class="pick-img" src="https://images.unsplash.com/photo-1525547717930-84d4d0c0a5b0?w=600&h=400&fit=crop" alt="Lenovo V15 G4 laptop">
+          <div class="pick-body">
+            <span class="badge badge-purple">Best Value</span>
+            <h3>Lenovo V15 G4</h3>
+            <p class="specs">Athlon Silver 7120U · 8GB DDR5 · 512GB SSD · 15.6" FHD</p>
+            <div class="price">₹46,999</div>
+            <div class="btn-row">
+              <a href="https://link.amazon/B0aHD7pWu" class="btn-amazon" target="_blank" rel="sponsored nofollow">Check Price on Amazon</a>
+              <a href="https://link.amazon/B0aHD7pWu" class="btn-view-img" target="_blank" rel="sponsored nofollow">View Real Image on Amazon</a>
+            </div>
+          </div>
         </div>
 
         <div class="pick-card">
-          <span class="badge badge-blue">Best Portable</span>
-          <h3>HP 15 Smartchoice</h3>
-          <p class="specs">Ryzen 3 7320U · 8GB LPDDR5 · 512GB SSD · 1.59 kg · Office 24 + M365</p>
-          <div class="price">₹49,990</div>
-          <a href="https://link.amazon/B072uPHUq" class="btn-amazon" target="_blank" rel="sponsored nofollow">View on Amazon →</a>
+          <img class="pick-img" src="https://images.unsplash.com/photo-1588872657578-7b1a5a9c5e0a?w=600&h=400&fit=crop" alt="HP 15 laptop">
+          <div class="pick-body">
+            <span class="badge badge-blue">Best Portable</span>
+            <h3>HP 15 Smartchoice</h3>
+            <p class="specs">Ryzen 3 7320U · 8GB LPDDR5 · 512GB SSD · 1.59 kg · Office</p>
+            <div class="price">₹49,990</div>
+            <div class="btn-row">
+              <a href="https://link.amazon/B072uPHUq" class="btn-amazon" target="_blank" rel="sponsored nofollow">Check Price on Amazon</a>
+              <a href="https://link.amazon/B072uPHUq" class="btn-view-img" target="_blank" rel="sponsored nofollow">View Real Image on Amazon</a>
+            </div>
+          </div>
         </div>
 
         <div class="pick-card">
-          <span class="badge badge-pink">Best with Office</span>
-          <h3>Dell 15 (Core 3 100U)</h3>
-          <p class="specs">14th Gen Core 3 · 8GB · 512GB SSD · 120Hz Display · Office H&S 2024</p>
-          <div class="price">₹51,990</div>
-          <a href="https://link.amazon/B03TMmqml" class="btn-amazon" target="_blank" rel="sponsored nofollow">View on Amazon →</a>
+          <img class="pick-img" src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45?w=600&h=400&fit=crop" alt="Dell 15 laptop">
+          <div class="pick-body">
+            <span class="badge badge-pink">Best with Office</span>
+            <h3>Dell 15 (Core 3 100U)</h3>
+            <p class="specs">14th Gen Core 3 · 8GB · 512GB SSD · 120Hz · Office H&S 2024</p>
+            <div class="price">₹51,990</div>
+            <div class="btn-row">
+              <a href="https://link.amazon/B03TMmqml" class="btn-amazon" target="_blank" rel="sponsored nofollow">Check Price on Amazon</a>
+              <a href="https://link.amazon/B03TMmqml" class="btn-view-img" target="_blank" rel="sponsored nofollow">View Real Image on Amazon</a>
+            </div>
+          </div>
         </div>
 
         <div class="pick-card">
-          <span class="badge badge-orange">Slim Option</span>
-          <h3>Lenovo IdeaPad Slim 3</h3>
-          <p class="specs">Ryzen 3 · 8GB · 512GB SSD · Thin & Light · Office 2024 · 1.6 kg</p>
-          <div class="price">₹51,990</div>
-          <a href="https://link.amazon/B0fq2CW5l" class="btn-amazon" target="_blank" rel="sponsored nofollow">View on Amazon →</a>
+          <img class="pick-img" src="https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?w=600&h=400&fit=crop" alt="Lenovo IdeaPad Slim 3 laptop">
+          <div class="pick-body">
+            <span class="badge badge-orange">Slim Option</span>
+            <h3>Lenovo IdeaPad Slim 3</h3>
+            <p class="specs">Ryzen 3 · 8GB · 512GB SSD · Thin & Light · Office 2024</p>
+            <div class="price">₹51,990</div>
+            <div class="btn-row">
+              <a href="https://link.amazon/B0fq2CW5l" class="btn-amazon" target="_blank" rel="sponsored nofollow">Check Price on Amazon</a>
+              <a href="https://link.amazon/B0fq2CW5l" class="btn-view-img" target="_blank" rel="sponsored nofollow">View Real Image on Amazon</a>
+            </div>
+          </div>
         </div>
 
       </div>
@@ -674,7 +720,7 @@
     <!-- COMPARISON TABLE -->
     <section class="section">
       <div class="section-label">Compare</div>
-      <h2 class="section-title">📊 Side-by-Side Comparison</h2>
+      <h2 class="section-title">Side-by-Side Comparison</h2>
       <div class="table-wrap">
         <table>
           <thead>
@@ -719,7 +765,7 @@
             <tr>
               <td><strong>Dell 15</strong></td>
               <td>₹51,990</td>
-              <td>Core 3 100U (14th Gen)</td>
+              <td>Core 3 100U</td>
               <td>8GB / 512GB</td>
               <td>15.6" FHD 120Hz</td>
               <td>1.63 kg</td>
@@ -737,216 +783,261 @@
           </tbody>
         </table>
       </div>
-      <p class="table-note">* Prices as of October 2026. Always verify current price on Amazon before buying.</p>
+      <p class="table-note">Prices as of October 2026. Always verify current price on Amazon before buying.</p>
     </section>
 
     <!-- DETAILED REVIEWS -->
     <section class="section">
       <div class="section-label">In-Depth</div>
-      <h2 class="section-title">🔍 Detailed Reviews</h2>
+      <h2 class="section-title">Detailed Reviews</h2>
 
+      <!-- 1 Acer -->
       <div class="review-card">
-        <div class="review-top">
-          <span class="badge badge-green">01 · Best Overall</span>
+        <div class="review-img-wrap">
+          <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=900&h=400&fit=crop" alt="Acer Aspire Lite AL15-41">
         </div>
-        <h3>Acer Aspire Lite AL15-41</h3>
-        <div class="rating">⭐ 4.5 / 5</div>
-        <p class="review-desc">
-          Yeh is list ka sabse balanced option hai. Metal body, thin & light (1.59 kg), aur Office 2024 + M365 Basic ke saath aata hai. 
-          Students ke liye online classes, notes, presentations aur daily use ke liye solid choice. Price bhi sabse better hai is list mein.
-        </p>
-        <div class="specs-grid">
-          <div><span>Processor:</span> AMD Ryzen 3-5400U</div>
-          <div><span>RAM:</span> 8GB</div>
-          <div><span>Storage:</span> 512GB SSD</div>
-          <div><span>Display:</span> 15.6" Full HD IPS</div>
-          <div><span>Weight:</span> 1.59 kg</div>
-          <div><span>Bonus:</span> Office 2024 + M365 Basic</div>
-        </div>
-        <div class="pros-cons">
-          <div class="pros">
-            <h4>✓ Pros</h4>
-            <ul>
-              <li>Metal body + premium feel</li>
-              <li>Office 2024 pre-installed</li>
-              <li>Light weight (1.59 kg)</li>
-              <li>Best price-to-feature ratio</li>
-            </ul>
+        <div class="review-content">
+          <div class="review-top">
+            <span class="badge badge-green">01 · Best Overall</span>
           </div>
-          <div class="cons">
-            <h4>✗ Cons</h4>
-            <ul>
-              <li>Only 8GB RAM (multitasking limited)</li>
-              <li>Entry-level Ryzen 3 processor</li>
-            </ul>
+          <h3>Acer Aspire Lite AL15-41</h3>
+          <div class="rating">4.5 / 5</div>
+          <p class="review-desc">
+            Yeh is list ka sabse balanced option hai. Metal body, thin and light (1.59 kg), aur Office 2024 + M365 Basic ke saath aata hai. 
+            Students ke liye online classes, notes, presentations aur daily use ke liye solid choice. Price bhi sabse better hai.
+          </p>
+          <div class="specs-grid">
+            <div><span>Processor:</span> AMD Ryzen 3-5400U</div>
+            <div><span>RAM:</span> 8GB</div>
+            <div><span>Storage:</span> 512GB SSD</div>
+            <div><span>Display:</span> 15.6" Full HD IPS</div>
+            <div><span>Weight:</span> 1.59 kg</div>
+            <div><span>Bonus:</span> Office 2024 + M365 Basic</div>
+          </div>
+          <div class="pros-cons">
+            <div class="pros">
+              <h4>Pros</h4>
+              <ul>
+                <li>Metal body + premium feel</li>
+                <li>Office 2024 pre-installed</li>
+                <li>Light weight (1.59 kg)</li>
+                <li>Best price-to-feature ratio</li>
+              </ul>
+            </div>
+            <div class="cons">
+              <h4>Cons</h4>
+              <ul>
+                <li>Only 8GB RAM (multitasking limited)</li>
+                <li>Entry-level Ryzen 3 processor</li>
+              </ul>
+            </div>
+          </div>
+          <div class="btn-row-review">
+            <a href="https://link.amazon/B07cCe4ZB" class="btn-amazon-sm" target="_blank" rel="sponsored nofollow">Check Price on Amazon</a>
+            <a href="https://link.amazon/B07cCe4ZB" class="btn-view-sm" target="_blank" rel="sponsored nofollow">View Real Image on Amazon</a>
           </div>
         </div>
-        <a href="https://link.amazon/B07cCe4ZB" class="btn-amazon-sm" target="_blank" rel="sponsored nofollow">Check Price on Amazon →</a>
       </div>
 
+      <!-- 2 Lenovo V15 -->
       <div class="review-card">
-        <div class="review-top">
-          <span class="badge badge-purple">02 · Best Value</span>
+        <div class="review-img-wrap">
+          <img src="https://images.unsplash.com/photo-1525547717930-84d4d0c0a5b0?w=900&h=400&fit=crop" alt="Lenovo V15 G4">
         </div>
-        <h3>Lenovo V15 G4</h3>
-        <div class="rating">⭐ 3.9 / 5 (398 ratings)</div>
-        <p class="review-desc">
-          Sasta aur reliable option. DDR5 RAM + 512GB SSD ke saath basic student kaam (classes, Word, browsing) smoothly handle karta hai. 
-          Agar budget tight hai to yeh solid pick hai.
-        </p>
-        <div class="specs-grid">
-          <div><span>Processor:</span> AMD Athlon Silver 7120U</div>
-          <div><span>RAM:</span> 8GB DDR5</div>
-          <div><span>Storage:</span> 512GB SSD</div>
-          <div><span>Display:</span> 15.6" Full HD</div>
-          <div><span>Graphics:</span> AMD Radeon 610M</div>
-          <div><span>Warranty:</span> 1 Year Brand</div>
-        </div>
-        <div class="pros-cons">
-          <div class="pros">
-            <h4>✓ Pros</h4>
-            <ul>
-              <li>Good 512GB SSD storage</li>
-              <li>DDR5 RAM</li>
-              <li>Decent build for the price</li>
-              <li>Lower price point</li>
-            </ul>
+        <div class="review-content">
+          <div class="review-top">
+            <span class="badge badge-purple">02 · Best Value</span>
           </div>
-          <div class="cons">
-            <h4>✗ Cons</h4>
-            <ul>
-              <li>Athlon Silver processor is basic</li>
-              <li>Display is average</li>
-              <li>No pre-installed Office</li>
-            </ul>
+          <h3>Lenovo V15 G4</h3>
+          <div class="rating">3.9 / 5 (398 ratings)</div>
+          <p class="review-desc">
+            Sasta aur reliable option. DDR5 RAM + 512GB SSD ke saath basic student kaam (classes, Word, browsing) smoothly handle karta hai. 
+            Agar budget tight hai to yeh solid pick hai.
+          </p>
+          <div class="specs-grid">
+            <div><span>Processor:</span> AMD Athlon Silver 7120U</div>
+            <div><span>RAM:</span> 8GB DDR5</div>
+            <div><span>Storage:</span> 512GB SSD</div>
+            <div><span>Display:</span> 15.6" Full HD</div>
+            <div><span>Graphics:</span> AMD Radeon 610M</div>
+            <div><span>Warranty:</span> 1 Year Brand</div>
+          </div>
+          <div class="pros-cons">
+            <div class="pros">
+              <h4>Pros</h4>
+              <ul>
+                <li>Good 512GB SSD storage</li>
+                <li>DDR5 RAM</li>
+                <li>Decent build for the price</li>
+                <li>Lower price point</li>
+              </ul>
+            </div>
+            <div class="cons">
+              <h4>Cons</h4>
+              <ul>
+                <li>Athlon Silver processor is basic</li>
+                <li>Display is average</li>
+                <li>No pre-installed Office</li>
+              </ul>
+            </div>
+          </div>
+          <div class="btn-row-review">
+            <a href="https://link.amazon/B0aHD7pWu" class="btn-amazon-sm" target="_blank" rel="sponsored nofollow">Check Price on Amazon</a>
+            <a href="https://link.amazon/B0aHD7pWu" class="btn-view-sm" target="_blank" rel="sponsored nofollow">View Real Image on Amazon</a>
           </div>
         </div>
-        <a href="https://link.amazon/B0aHD7pWu" class="btn-amazon-sm" target="_blank" rel="sponsored nofollow">Check Price on Amazon →</a>
       </div>
 
+      <!-- 3 HP -->
       <div class="review-card">
-        <div class="review-top">
-          <span class="badge badge-blue">03 · Best Portable</span>
+        <div class="review-img-wrap">
+          <img src="https://images.unsplash.com/photo-1588872657578-7b1a5a9c5e0a?w=900&h=400&fit=crop" alt="HP 15 Smartchoice">
         </div>
-        <h3>HP 15 Smartchoice</h3>
-        <div class="rating">⭐ 4.2 / 5 (144 ratings)</div>
-        <p class="review-desc">
-          HP ka service network India mein strong hai. Light weight (1.59 kg) + Office bundle students ke liye convenient hai. 
-          Privacy shutter wala camera bhi plus point hai college use ke liye.
-        </p>
-        <div class="specs-grid">
-          <div><span>Processor:</span> AMD Ryzen 3 7320U</div>
-          <div><span>RAM:</span> 8GB LPDDR5</div>
-          <div><span>Storage:</span> 512GB SSD</div>
-          <div><span>Display:</span> 15.6" FHD Anti-Glare</div>
-          <div><span>Weight:</span> 1.59 kg</div>
-          <div><span>Bonus:</span> Office 24 + M365 Basic</div>
-        </div>
-        <div class="pros-cons">
-          <div class="pros">
-            <h4>✓ Pros</h4>
-            <ul>
-              <li>Light (1.59 kg)</li>
-              <li>Office 2024 + M365 included</li>
-              <li>Strong brand support network</li>
-              <li>Privacy shutter on camera</li>
-            </ul>
+        <div class="review-content">
+          <div class="review-top">
+            <span class="badge badge-blue">03 · Best Portable</span>
           </div>
-          <div class="cons">
-            <h4>✗ Cons</h4>
-            <ul>
-              <li>Only 8GB RAM</li>
-              <li>Average battery life expected</li>
-            </ul>
+          <h3>HP 15 Smartchoice</h3>
+          <div class="rating">4.2 / 5 (144 ratings)</div>
+          <p class="review-desc">
+            HP ka service network India mein strong hai. Light weight (1.59 kg) + Office bundle students ke liye convenient hai. 
+            Privacy shutter wala camera bhi plus point hai college use ke liye.
+          </p>
+          <div class="specs-grid">
+            <div><span>Processor:</span> AMD Ryzen 3 7320U</div>
+            <div><span>RAM:</span> 8GB LPDDR5</div>
+            <div><span>Storage:</span> 512GB SSD</div>
+            <div><span>Display:</span> 15.6" FHD Anti-Glare</div>
+            <div><span>Weight:</span> 1.59 kg</div>
+            <div><span>Bonus:</span> Office 24 + M365 Basic</div>
+          </div>
+          <div class="pros-cons">
+            <div class="pros">
+              <h4>Pros</h4>
+              <ul>
+                <li>Light (1.59 kg)</li>
+                <li>Office 2024 + M365 included</li>
+                <li>Strong brand support network</li>
+                <li>Privacy shutter on camera</li>
+              </ul>
+            </div>
+            <div class="cons">
+              <h4>Cons</h4>
+              <ul>
+                <li>Only 8GB RAM</li>
+                <li>Average battery life expected</li>
+              </ul>
+            </div>
+          </div>
+          <div class="btn-row-review">
+            <a href="https://link.amazon/B072uPHUq" class="btn-amazon-sm" target="_blank" rel="sponsored nofollow">Check Price on Amazon</a>
+            <a href="https://link.amazon/B072uPHUq" class="btn-view-sm" target="_blank" rel="sponsored nofollow">View Real Image on Amazon</a>
           </div>
         </div>
-        <a href="https://link.amazon/B072uPHUq" class="btn-amazon-sm" target="_blank" rel="sponsored nofollow">Check Price on Amazon →</a>
       </div>
 
+      <!-- 4 Dell -->
       <div class="review-card">
-        <div class="review-top">
-          <span class="badge badge-pink">04 · Best with Office</span>
+        <div class="review-img-wrap">
+          <img src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45?w=900&h=400&fit=crop" alt="Dell 15">
         </div>
-        <h3>Dell 15 (Core 3 100U)</h3>
-        <div class="rating">⭐ 4.0 / 5 (379 ratings)</div>
-        <p class="review-desc">
-          120Hz display is range mein rare hai — smooth scrolling aur videos ke liye accha lagta hai. 
-          Office Home & Student 2024 ke saath ready-to-use. Dell ka build reliable hai long term ke liye.
-        </p>
-        <div class="specs-grid">
-          <div><span>Processor:</span> 14th Gen Intel Core 3 100U</div>
-          <div><span>RAM:</span> 8GB DDR4</div>
-          <div><span>Storage:</span> 512GB SSD</div>
-          <div><span>Display:</span> 15.6" FHD 120Hz IPS</div>
-          <div><span>Weight:</span> 1.63 kg</div>
-          <div><span>Bonus:</span> Office Home & Student 2024</div>
-        </div>
-        <div class="pros-cons">
-          <div class="pros">
-            <h4>✓ Pros</h4>
-            <ul>
-              <li>120Hz smooth display</li>
-              <li>Pre-installed Office H&S 2024</li>
-              <li>Reliable Dell build</li>
-              <li>Good for presentations</li>
-            </ul>
+        <div class="review-content">
+          <div class="review-top">
+            <span class="badge badge-pink">04 · Best with Office</span>
           </div>
-          <div class="cons">
-            <h4>✗ Cons</h4>
-            <ul>
-              <li>Slightly over ₹50,000</li>
-              <li>Only 8GB RAM</li>
-              <li>Average battery expected</li>
-            </ul>
+          <h3>Dell 15 (Core 3 100U)</h3>
+          <div class="rating">4.0 / 5 (379 ratings)</div>
+          <p class="review-desc">
+            120Hz display is range mein rare hai — smooth scrolling aur videos ke liye accha lagta hai. 
+            Office Home and Student 2024 ke saath ready-to-use. Dell ka build reliable hai long term ke liye.
+          </p>
+          <div class="specs-grid">
+            <div><span>Processor:</span> 14th Gen Intel Core 3 100U</div>
+            <div><span>RAM:</span> 8GB DDR4</div>
+            <div><span>Storage:</span> 512GB SSD</div>
+            <div><span>Display:</span> 15.6" FHD 120Hz IPS</div>
+            <div><span>Weight:</span> 1.63 kg</div>
+            <div><span>Bonus:</span> Office Home & Student 2024</div>
+          </div>
+          <div class="pros-cons">
+            <div class="pros">
+              <h4>Pros</h4>
+              <ul>
+                <li>120Hz smooth display</li>
+                <li>Pre-installed Office H&S 2024</li>
+                <li>Reliable Dell build</li>
+                <li>Good for presentations</li>
+              </ul>
+            </div>
+            <div class="cons">
+              <h4>Cons</h4>
+              <ul>
+                <li>Slightly over ₹50,000</li>
+                <li>Only 8GB RAM</li>
+                <li>Average battery expected</li>
+              </ul>
+            </div>
+          </div>
+          <div class="btn-row-review">
+            <a href="https://link.amazon/B03TMmqml" class="btn-amazon-sm" target="_blank" rel="sponsored nofollow">Check Price on Amazon</a>
+            <a href="https://link.amazon/B03TMmqml" class="btn-view-sm" target="_blank" rel="sponsored nofollow">View Real Image on Amazon</a>
           </div>
         </div>
-        <a href="https://link.amazon/B03TMmqml" class="btn-amazon-sm" target="_blank" rel="sponsored nofollow">Check Price on Amazon →</a>
       </div>
 
+      <!-- 5 IdeaPad -->
       <div class="review-card">
-        <div class="review-top">
-          <span class="badge badge-orange">05 · Slim Option</span>
+        <div class="review-img-wrap">
+          <img src="https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?w=900&h=400&fit=crop" alt="Lenovo IdeaPad Slim 3">
         </div>
-        <h3>Lenovo IdeaPad Slim 3</h3>
-        <div class="rating">⭐ 4.1 / 5 (29 ratings)</div>
-        <p class="review-desc">
-          Thin & light design with Office 2024. Daily college use, notes aur online classes ke liye decent option. 
-          Design clean hai aur carry karna easy hai bag mein.
-        </p>
-        <div class="specs-grid">
-          <div><span>Processor:</span> AMD Ryzen 3</div>
-          <div><span>RAM:</span> 8GB</div>
-          <div><span>Storage:</span> 512GB SSD</div>
-          <div><span>Display:</span> 15.6" Full HD</div>
-          <div><span>Weight:</span> 1.6 kg</div>
-          <div><span>Bonus:</span> Office 2024</div>
-        </div>
-        <div class="pros-cons">
-          <div class="pros">
-            <h4>✓ Pros</h4>
-            <ul>
-              <li>Slim & light design</li>
-              <li>Office 2024 included</li>
-              <li>Good for daily tasks</li>
-              <li>Clean looks</li>
-            </ul>
+        <div class="review-content">
+          <div class="review-top">
+            <span class="badge badge-orange">05 · Slim Option</span>
           </div>
-          <div class="cons">
-            <h4>✗ Cons</h4>
-            <ul>
-              <li>Over ₹50,000</li>
-              <li>8GB RAM limitation</li>
-              <li>Entry-level processor</li>
-            </ul>
+          <h3>Lenovo IdeaPad Slim 3</h3>
+          <div class="rating">4.1 / 5 (29 ratings)</div>
+          <p class="review-desc">
+            Thin and light design with Office 2024. Daily college use, notes aur online classes ke liye decent option. 
+            Design clean hai aur carry karna easy hai bag mein.
+          </p>
+          <div class="specs-grid">
+            <div><span>Processor:</span> AMD Ryzen 3</div>
+            <div><span>RAM:</span> 8GB</div>
+            <div><span>Storage:</span> 512GB SSD</div>
+            <div><span>Display:</span> 15.6" Full HD</div>
+            <div><span>Weight:</span> 1.6 kg</div>
+            <div><span>Bonus:</span> Office 2024</div>
+          </div>
+          <div class="pros-cons">
+            <div class="pros">
+              <h4>Pros</h4>
+              <ul>
+                <li>Slim and light design</li>
+                <li>Office 2024 included</li>
+                <li>Good for daily tasks</li>
+                <li>Clean looks</li>
+              </ul>
+            </div>
+            <div class="cons">
+              <h4>Cons</h4>
+              <ul>
+                <li>Over ₹50,000</li>
+                <li>8GB RAM limitation</li>
+                <li>Entry-level processor</li>
+              </ul>
+            </div>
+          </div>
+          <div class="btn-row-review">
+            <a href="https://link.amazon/B0fq2CW5l" class="btn-amazon-sm" target="_blank" rel="sponsored nofollow">Check Price on Amazon</a>
+            <a href="https://link.amazon/B0fq2CW5l" class="btn-view-sm" target="_blank" rel="sponsored nofollow">View Real Image on Amazon</a>
           </div>
         </div>
-        <a href="https://link.amazon/B0fq2CW5l" class="btn-amazon-sm" target="_blank" rel="sponsored nofollow">Check Price on Amazon →</a>
       </div>
     </section>
 
     <!-- BUYING GUIDE -->
     <div class="guide-box">
-      <h3>📘 Quick Buying Guide — Kya Check Karein?</h3>
+      <h3>Quick Buying Guide</h3>
       <div class="guide-grid">
         <div class="guide-item">
           <h4>RAM</h4>
@@ -954,15 +1045,15 @@
         </div>
         <div class="guide-item">
           <h4>Storage</h4>
-          <p>512GB SSD must hai. HDD wale options bilkul avoid karo — speed mein farak clear dikhega.</p>
+          <p>512GB SSD must hai. HDD wale options bilkul avoid karo. Speed mein farak clear dikhega.</p>
         </div>
         <div class="guide-item">
           <h4>Processor</h4>
-          <p>Ryzen 3 ya Core 3/i3 level sufficient hai classes + Office ke liye. Heavy coding / Android Studio ke liye thoda weak padega.</p>
+          <p>Ryzen 3 ya Core 3 level sufficient hai classes + Office ke liye. Heavy coding ya Android Studio ke liye thoda weak padega.</p>
         </div>
         <div class="guide-item">
-          <h4>Weight & Office</h4>
-          <p>1.6 kg ke around wale better for college bag. Pre-installed Office wale models students ke liye convenient hain — alag se kharidne ki zarurat nahi.</p>
+          <h4>Weight and Office</h4>
+          <p>1.6 kg ke around wale better for college bag. Pre-installed Office wale models students ke liye convenient hain.</p>
         </div>
       </div>
     </div>
@@ -970,39 +1061,39 @@
     <!-- FAQ -->
     <section class="section">
       <div class="section-label">FAQ</div>
-      <h2 class="section-title">❓ Frequently Asked Questions</h2>
+      <h2 class="section-title">Frequently Asked Questions</h2>
       <div class="faq-list">
 
         <details class="faq-item">
-          <summary>Kya 8GB RAM 2026 mein students ke liye kaafi hai?</summary>
+          <summary>Is 8GB RAM enough for students in 2026?</summary>
           <div class="faq-answer">
             Basic use (classes, notes, browsing, light multitasking) ke liye haan. Agar aap bahut saare tabs + software ek saath chalana chahte ho to 16GB better hota, lekin is budget mein 8GB hi milta hai. Most students ke liye manage ho jaata hai.
           </div>
         </details>
 
         <details class="faq-item">
-          <summary>Inme se sabse best kaunsa hai?</summary>
+          <summary>Which is the best laptop in this list?</summary>
           <div class="faq-answer">
             Overall <strong>Acer Aspire Lite AL15-41</strong> best lagta hai — price, metal body, Office bundle aur weight ka balance sabse accha hai. Agar aapka budget thoda stretch ho sakta hai to Dell 15 (120Hz + Office) bhi strong option hai.
           </div>
         </details>
 
         <details class="faq-item">
-          <summary>Kya yeh laptops coding ke liye theek hain?</summary>
+          <summary>Are these laptops good for coding?</summary>
           <div class="faq-answer">
             Light coding (Python, HTML, basic Java, C++) ke liye theek hain. Heavy IDEs + Android Studio + multiple tools ek saath ke liye thoda struggle karega. Engineering students ko ideally 16GB RAM wala dekhna chahiye.
           </div>
         </details>
 
         <details class="faq-item">
-          <summary>Battery kitne ghante chalegi?</summary>
+          <summary>How long does the battery last?</summary>
           <div class="faq-answer">
-            Real use mein 5–7 hours expect karo (online classes + browsing). Full day ke liye power bank ya charging point college mein rakho. Battery life heavily depend karti hai screen brightness aur background apps par.
+            Real use mein 5 to 7 hours expect karo (online classes + browsing). Full day ke liye power bank ya charging point college mein rakho. Battery life heavily depend karti hai screen brightness aur background apps par.
           </div>
         </details>
 
         <details class="faq-item">
-          <summary>Dell aur Lenovo IdeaPad Slim 3 ₹50,000 se upar hain. Kya include karna chahiye?</summary>
+          <summary>Dell and IdeaPad Slim 3 are above ₹50,000. Should they be included?</summary>
           <div class="faq-answer">
             Haan, dono around ₹52k hain. Agar aapka budget thoda stretch ho sakta hai to yeh better options hain — especially Dell ka 120Hz display aur Office bundle. Strict ₹50k limit hai to Acer Aspire Lite aur Lenovo V15 G4 pe focus karo.
           </div>
@@ -1013,9 +1104,9 @@
 
     <!-- CTA -->
     <div class="cta-box">
-      <h3>🛒 Abhi Apna Student Laptop Book Karein!</h3>
-      <p>Prices change hote rehte hain. Apne favorite model ko Amazon cart mein add karein aur current deal check karein.</p>
-      <a href="https://www.amazon.in/s?k=laptop+under+50000" class="btn-white" target="_blank" rel="sponsored nofollow">View All Deals on Amazon →</a>
+      <h3>Ready to pick your student laptop?</h3>
+      <p>Prices change often. Add your preferred model to the Amazon cart and check the current deal.</p>
+      <a href="https://www.amazon.in/s?k=laptop+under+50000" class="btn-white" target="_blank" rel="sponsored nofollow">View All Deals on Amazon</a>
     </div>
 
   </div>
@@ -1059,11 +1150,6 @@
       </p>
     </div>
   </footer>
-
-  <!-- WhatsApp Float -->
-  <a href="https://wa.me/91XXXXXXXXXX" class="wa-float" target="_blank" aria-label="WhatsApp">
-    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-  </a>
 
 </body>
 </html>
