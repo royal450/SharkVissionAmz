@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>How We Review — Our Process, Ethics & Standards | ShopMaze</title>
+<meta name="description" content="Learn how ShopMaze reviews laptops and desktops. Our research process, editorial standards, and why 10,000+ Indian shoppers trust our buying guides.">
+<meta name="keywords" content="shopmaze how we review, editorial policy, review process, amazon affiliate disclosure, tech review india">
+<meta name="author" content="ShopMaze">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#ffffff">
+<link rel="canonical" href="https://shopmaze.web.app/how-we-review/">
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="How We Review — ShopMaze">
+<meta property="og:description" content="Our research process, editorial standards, and why Indian shoppers trust us.">
+<meta property="og:url" content="https://shopmaze.web.app/how-we-review/">
+<meta property="og:site_name" content="ShopMaze">
+<meta property="og:image" content="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=1200&h=630&fit=crop&q=80">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="How We Review — ShopMaze">
+<meta name="twitter:image" content="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=1200&h=630&fit=crop&q=80">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    { "@type": "Organization", "@id": "https://shopmaze.web.app/#organization", "name": "ShopMaze", "url": "https://shopmaze.web.app", "logo": "https://shopmaze.web.app/assets/logo.png", "description": "Honest tech reviews and buying guides for Indian shoppers. Specializing in laptops and desktops.", "foundingDate": "2024", "areaServed": "IN", "sameAs": ["https://www.linkedin.com/in/royal-dev-131467383"] },
+    { "@type": "WebSite", "@id": "https://shopmaze.web.app/#website", "url": "https://shopmaze.web.app", "name": "ShopMaze", "publisher": { "@id": "https://shopmaze.web.app/#organization" } },
+    {
+      "@type": "WebPage",
+      "@id": "https://shopmaze.web.app/how-we-review/#webpage",
+      "url": "https://shopmaze.web.app/how-we-review/",
+      "name": "How We Review — ShopMaze",
+      "isPartOf": { "@id": "https://shopmaze.web.app/#website" },
+      "about": { "@id": "https://shopmaze.web.app/#organization" },
+      "description": "Learn how ShopMaze researches, tests, and ranks tech products for Indian shoppers."
+    }
+  ]
+}
+</script>
+
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', sans-serif; line-height: 1.6; color: #1a1a1a; background: #fff; -webkit-font-smoothing: antialiased; }
+
+/* HEADER */
+.header { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid #f0f0f0; }
+.header.scrolled { box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+.header-inner { max-width: 1100px; margin: 0 auto; padding: 8px 24px; display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+.logo { display: flex; align-items: center; text-decoration: none; }
+.logo-svg { height: 68px; width: auto; display: block; }
+.nav-links { display: flex; gap: 4px; align-items: center; }
+.nav-links a { color: #374151; text-decoration: none; font-size: 14px; font-weight: 500; padding: 8px 14px; border-radius: 8px; transition: all 0.25s; }
+.nav-links a:hover, .nav-links a.active { background: #f3f4f6; color: #111; }
+.menu-btn { width: 42px; height: 42px; background: #f5f5f7; border: none; border-radius: 10px; cursor: pointer; display: none; align-items: center; justify-content: center; position: relative; }
+.menu-btn .bar { display: block; width: 20px; height: 2px; background: #111; border-radius: 2px; position: absolute; left: 50%; transform: translateX(-50%); transition: all 0.3s; }
+.menu-btn .bar:nth-child(1) { top: 13px; }
+.menu-btn .bar:nth-child(2) { top: 20px; }
+.menu-btn .bar:nth-child(3) { top: 27px; }
+.menu-btn.open { background: #111; }
+.menu-btn.open .bar { background: #fff; }
+.menu-btn.open .bar:nth-child(1) { top: 20px; transform: translateX(-50%) rotate(45deg); }
+.menu-btn.open .bar:nth-child(2) { opacity: 0; }
+.menu-btn.open .bar:nth-child(3) { top: 20px; transform: translateX(-50%) rotate(-45deg); }
+.mobile-menu { max-height: 0; overflow: hidden; background: #fff; transition: max-height 0.4s; }
+.mobile-menu.open { max-height: 600px; border-bottom: 1px solid #f0f0f0; }
+.mobile-menu-inner { padding: 8px 24px 16px; }
+.mobile-menu a { display: block; color: #374151; text-decoration: none; font-size: 15px; font-weight: 500; padding: 12px; border-radius: 8px; }
+
+.wrap { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+/* HERO */
+.hero { padding: 56px 0 40px; text-align: center; border-bottom: 1px solid #f0f0f0; }
+.hero-badge { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: #111; background: #fef9c3; padding: 6px 14px; border-radius: 100px; margin-bottom: 20px; }
+.hero h1 { font-size: 42px; line-height: 1.15; letter-spacing: -1.2px; font-weight: 900; color: #111; margin-bottom: 18px; max-width: 820px; margin-left: auto; margin-right: auto; }
+.hero h1 .highlight { background: linear-gradient(180deg, transparent 60%, #EAB308 60%); padding: 0 4px; }
+.hero-sub { font-size: 17px; color: #6b7280; max-width: 680px; margin: 0 auto 28px; line-height: 1.65; }
+
+/* TRUST STATS */
+.trust-stats { display: flex; gap: 40px; justify-content: center; flex-wrap: wrap; margin-top: 40px; padding-top: 32px; border-top: 1px solid #f0f0f0; }
+.trust-stat { text-align: center; }
+.trust-stat-num { font-size: 30px; font-weight: 900; color: #111; letter-spacing: -0.5px; line-height: 1; margin-bottom: 6px; }
+.trust-stat-label { font-size: 13px; color: #6b7280; font-weight: 500; }
+
+/* SECTION */
+.section { padding: 48px 0; border-bottom: 1px solid #f0f0f0; }
+.section:last-child { border-bottom: none; }
+.section-header { margin-bottom: 32px; text-align: center; }
+.section-eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: #9ca3af; margin-bottom: 8px; }
+.section-title { font-size: 30px; font-weight: 900; color: #111; letter-spacing: -0.6px; margin-bottom: 10px; }
+.section-desc { font-size: 16px; color: #6b7280; max-width: 680px; margin: 0 auto; line-height: 1.65; }
+
+/* PROCESS STEPS */
+.steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.step-card { padding: 28px 24px; background: #fafbfc; border: 1px solid #f0f0f0; border-radius: 16px; transition: all 0.25s; }
+.step-card:hover { border-color: #111; transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,0.06); }
+.step-num { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 12px; background: #111; color: #EAB308; font-size: 18px; font-weight: 900; margin-bottom: 16px; }
+.step-title { font-size: 18px; font-weight: 800; color: #111; margin-bottom: 8px; letter-spacing: -0.3px; }
+.step-desc { font-size: 14px; color: #6b7280; line-height: 1.65; }
+
+/* ETHICS CARDS */
+.ethics-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+.ethics-card { padding: 28px; background: #fff; border: 1.5px solid #e5e7eb; border-radius: 16px; }
+.ethics-icon { width: 48px; height: 48px; border-radius: 12px; background: #fef9c3; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
+.ethics-icon svg { width: 24px; height: 24px; fill: #A16207; }
+.ethics-title { font-size: 18px; font-weight: 800; color: #111; margin-bottom: 8px; letter-spacing: -0.3px; }
+.ethics-desc { font-size: 14.5px; color: #4b5563; line-height: 1.7; }
+.ethics-desc strong { color: #111; }
+
+/* CHECKLIST */
+.checklist { display: flex; flex-direction: column; gap: 12px; max-width: 820px; margin: 0 auto; }
+.check-item { display: flex; gap: 14px; align-items: flex-start; padding: 18px 22px; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 12px; }
+.check-icon { flex-shrink: 0; width: 26px; height: 26px; border-radius: 50%; background: #15803D; display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+.check-icon svg { width: 15px; height: 15px; fill: #fff; }
+.check-text { font-size: 15px; color: #374151; line-height: 1.6; }
+.check-text strong { color: #111; font-weight: 800; }
+
+/* AUTHOR CARD */
+.author-card { max-width: 820px; margin: 0 auto; padding: 32px; background: linear-gradient(135deg, #fafbfc 0%, #f3f4f6 100%); border: 1px solid #e5e7eb; border-radius: 16px; display: flex; gap: 24px; align-items: flex-start; }
+.author-avatar { flex-shrink: 0; width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #EAB308 0%, #F59E0B 100%); display: flex; align-items: center; justify-content: center; font-size: 32px; font-weight: 900; color: #111; }
+.author-content h3 { font-size: 22px; font-weight: 900; color: #111; margin-bottom: 4px; }
+.author-role { font-size: 13px; font-weight: 700; color: #A16207; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 12px; }
+.author-bio { font-size: 14.5px; color: #4b5563; line-height: 1.7; }
+.author-bio strong { color: #111; }
+
+/* SITEMAP SECTION */
+.sitemap-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.sitemap-col { padding: 24px; background: #fafbfc; border: 1px solid #f0f0f0; border-radius: 14px; }
+.sitemap-col-title { font-size: 13px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: #111; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 2px solid #EAB308; display: inline-block; }
+.sitemap-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+.sitemap-list a { font-size: 13.5px; color: #0645AD; text-decoration: underline; text-underline-offset: 3px; font-weight: 500; line-height: 1.5; display: inline-block; }
+.sitemap-list a:hover { color: #0b0080; }
+
+/* CTA BANNER */
+.cta-banner { padding: 36px 28px; background: linear-gradient(135deg, #0A0A0A 0%, #1F2937 100%); border-radius: 16px; text-align: center; margin: 0 0 48px; }
+.cta-banner h3 { font-size: 26px; font-weight: 900; color: #fff; margin-bottom: 10px; letter-spacing: -0.5px; }
+.cta-banner h3 .yellow { color: #EAB308; }
+.cta-banner p { font-size: 15px; color: #d1d5db; margin-bottom: 22px; max-width: 520px; margin-left: auto; margin-right: auto; }
+.cta-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.cta-btn-primary { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; background: #EAB308; color: #111 !important; border-radius: 10px; font-size: 15px; font-weight: 800; text-decoration: none; transition: all 0.2s; }
+.cta-btn-primary:hover { background: #F59E0B; transform: translateY(-2px); }
+.cta-btn-secondary { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; background: rgba(255,255,255,0.1); color: #fff !important; border: 1.5px solid rgba(255,255,255,0.25); border-radius: 10px; font-size: 15px; font-weight: 700; text-decoration: none; transition: all 0.2s; }
+.cta-btn-secondary:hover { background: rgba(255,255,255,0.18); }
+
+/* FOOTER */
+.sm-footer { background: #f9fafb; color: #374151; border-top: 1px solid #e5e7eb; padding: 50px 0 0; }
+.sm-footer-inner { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+.footer-top { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 36px; padding-bottom: 32px; border-bottom: 1px solid #e5e7eb; }
+.footer-logo-svg { height: 60px; width: auto; display: block; margin-bottom: 14px; }
+.footer-brand p { color: #6b7280; font-size: 13.5px; line-height: 1.6; margin-bottom: 16px; }
+.footer-social { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+.footer-social a { width: 36px; height: 36px; border-radius: 10px; background: #fff; border: 1px solid #e5e7eb; display: flex; align-items: center; justify-content: center; transition: all 0.25s; }
+.footer-social a:hover { background: #111; border-color: #111; transform: translateY(-2px); }
+.footer-social svg { width: 17px; height: 17px; fill: #6b7280; }
+.footer-social a:hover svg { fill: #fff; }
+.footer-col h4 { color: #111; font-size: 13px; font-weight: 700; margin-bottom: 14px; text-transform: uppercase; letter-spacing: 0.7px; }
+.footer-col ul { list-style: none; }
+.footer-col ul li { margin-bottom: 8px; }
+.footer-col ul a { color: #0645AD; text-decoration: underline; text-underline-offset: 3px; font-size: 13.5px; display: inline-block; font-weight: 500; }
+.footer-col ul a:hover { color: #0b0080; }
+.footer-bottom { padding: 20px 0; display: flex; justify-content: center; align-items: center; font-size: 12.5px; color: #9ca3af; flex-wrap: wrap; gap: 12px; text-align: center; }
+.amazon-disclosure { padding: 14px 0 16px; border-top: 1px solid #e5e7eb; margin-top: 12px; font-size: 11px; color: #b0b6bf; line-height: 1.5; text-align: center; }
+.amazon-disclosure strong { color: #9ca3af; font-weight: 500; }
+
+/* WHATSAPP */
+.whatsapp-float { position: fixed; bottom: 18px; right: 15px; width: 44px; height: 44px; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; box-shadow: 0 4px 14px rgba(37,211,102,0.4); z-index: 9999; transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1); opacity: 0; transform: translateY(60px) scale(0.6); pointer-events: none; }
+.whatsapp-float.visible { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+.whatsapp-float:hover { transform: scale(1.12) rotate(-8deg); box-shadow: 0 8px 22px rgba(37,211,102,0.55); }
+.whatsapp-float svg { width: 22px; height: 22px; fill: #fff; }
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .header-inner, .wrap, .sm-footer-inner { padding-left: 20px; padding-right: 20px; }
+  .hero h1 { font-size: 34px; }
+  .steps-grid { grid-template-columns: 1fr 1fr; }
+  .ethics-grid { grid-template-columns: 1fr; }
+  .sitemap-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 900px) {
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 26px; }
+}
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .menu-btn { display: flex; }
+  .logo-svg { height: 52px; }
+  .footer-logo-svg { height: 52px; }
+  .hero { padding: 40px 0 32px; }
+  .hero h1 { font-size: 28px; }
+  .hero-sub { font-size: 15px; }
+  .section-title { font-size: 24px; }
+  .steps-grid { grid-template-columns: 1fr; }
+  .sitemap-grid { grid-template-columns: 1fr; }
+  .author-card { flex-direction: column; text-align: center; }
+  .author-avatar { margin: 0 auto; }
+}
+@media (max-width: 600px) {
+  .header-inner, .wrap, .sm-footer-inner { padding-left: 16px; padding-right: 16px; }
+  .hero h1 { font-size: 24px; }
+  .hero-sub { font-size: 14.5px; }
+  .trust-stats { gap: 24px; margin-top: 28px; padding-top: 22px; }
+  .trust-stat-num { font-size: 22px; }
+  .trust-stat-label { font-size: 12px; }
+  .section { padding: 36px 0; }
+  .section-title { font-size: 22px; }
+  .section-desc { font-size: 14.5px; }
+  .cta-banner h3 { font-size: 20px; }
+  .cta-buttons { flex-direction: column; }
+  .cta-btn-primary, .cta-btn-secondary { width: 100%; justify-content: center; }
+  .footer-top { grid-template-columns: 1fr; gap: 22px; }
+  .whatsapp-float { width: 42px; height: 42px; bottom: 14px; right: 14px; }
+  .whatsapp-float svg { width: 20px; height: 20px; }
+  .author-card { padding: 24px 20px; }
+  .ethics-card, .step-card { padding: 22px 18px; }
+}
+@media (max-width: 380px) {
+  .hero h1 { font-size: 22px; }
+  .section-title { font-size: 20px; }
+  .logo-svg, .footer-logo-svg { height: 46px; }
+}
+</style>
+
+<!-- Auto-injected tracker -->
+<script src="/telegram-tracker.js" defer></script>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header" id="header">
+  <div class="header-inner">
+    <a href="/" class="logo">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 100" class="logo-svg">
+        <g transform="translate(8, 22) scale(1.05)">
+          <path d="M7 29 H17 L24 14 L34 44 L41 23 L47 29 H53" fill="none" stroke="#1F2937" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="24" cy="14" r="4" fill="#EAB308"/>
+          <circle cx="34" cy="44" r="4" fill="#EAB308"/>
+        </g>
+        <text x="76" y="61" font-family="Arial Black, Arial" font-size="37" font-weight="900" letter-spacing="-1.2">
+          <tspan fill="#1F2937">Shop</tspan><tspan fill="#EAB308">Maze</tspan>
+        </text>
+        <text x="79" y="78" font-family="Arial" font-size="8" font-weight="700" letter-spacing="3" fill="#687386">ELECTRONICS</text>
+      </svg>
+    </a>
+    <nav class="nav-links">
+      <a href="/">Home</a>
+      <a href="/laptops">Laptops</a>
+      <a href="/desktops">Desktops</a>
+      <a href="/how-we-review/" class="active">How We Review</a>
+    </nav>
+    <button class="menu-btn" id="menuBtn"><span class="bar"></span><span class="bar"></span><span class="bar"></span></button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-inner">
+      <a href="/">Home</a>
+      <a href="/laptops">Laptops</a>
+      <a href="/desktops">Desktops</a>
+      <a href="/how-we-review/">How We Review</a>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- HERO -->
+  <section class="hero">
+    <span class="hero-badge">🔒 Editorial Transparency</span>
+    <h1>How we research, review, and <span class="highlight">rank tech</span> for Indian shoppers.</h1>
+    <p class="hero-sub">No sponsored picks. No paid placements. Every recommendation on ShopMaze is built on genuine research, verified reviews, and real-world testing — so you can shop with confidence.</p>
+    <div class="trust-stats">
+      <div class="trust-stat"><div class="trust-stat-num">100%</div><div class="trust-stat-label">Independent</div></div>
+      <div class="trust-stat"><div class="trust-stat-num">0</div><div class="trust-stat-label">Sponsored Picks</div></div>
+      <div class="trust-stat"><div class="trust-stat-num">50+</div><div class="trust-stat-label">Products Analysed</div></div>
+      <div class="trust-stat"><div class="trust-stat-num">2026</div><div class="trust-stat-label">Updated</div></div>
+    </div>
+  </section>
+
+  <!-- OUR PROCESS -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-eyebrow">Our Process</div>
+      <h2 class="section-title">How every guide is built</h2>
+      <p class="section-desc">Every product we recommend goes through the same rigorous 6-step process. Here's exactly what happens.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">01</div>
+        <h3 class="step-title">Discover on Amazon India</h3>
+        <p class="step-desc">We start with the most relevant, actively sold listings in a given budget band. Products must be genuinely available — no out-of-stock picks.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">02</div>
+        <h3 class="step-title">Read lakhs of reviews</h3>
+        <p class="step-desc">We filter verified Amazon reviews, YouTube deep-dives, and community forums to understand how each product actually performs after months of use.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">03</div>
+        <h3 class="step-title">Compare specs honestly</h3>
+        <p class="step-desc">Processor, RAM, storage, display, thermals — we compare like-for-like and identify where brands cut corners to hit a price point.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">04</div>
+        <h3 class="step-title">Cross-check with testing</h3>
+        <p class="step-desc">We reference independent lab tests, hands-on video reviews, and benchmark data to validate real-world performance claims.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">05</div>
+        <h3 class="step-title">Rank by real value</h3>
+        <p class="step-desc">We rank by what matters to Indian shoppers — value for money, reliability, after-sales support, and long-term usability.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">06</div>
+        <h3 class="step-title">Keep only the best 5</h3>
+        <p class="step-desc">Most products don't make the cut. We keep only the top five per guide — no filler, no padding, no sponsored placements.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- OUR ETHICS -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-eyebrow">Our Ethics</div>
+      <h2 class="section-title">What we stand for</h2>
+      <p class="section-desc">Trust is earned, not claimed. Here's how we protect yours.</p>
+    </div>
+    <div class="ethics-grid">
+      <div class="ethics-card">
+        <div class="ethics-icon"><svg viewBox="0 0 24 24"><path d="M12 2L4 6v6c0 5 3.5 9 8 10 4.5-1 8-5 8-10V6l-8-4z"/></svg></div>
+        <h3 class="ethics-title">Zero Sponsorships</h3>
+        <p class="ethics-desc">No brand pays us to feature their product. We do <strong>not accept free products, gifts, or paid placements</strong> in exchange for a recommendation. Our rankings are purely editorial.</p>
+      </div>
+      <div class="ethics-card">
+        <div class="ethics-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg></div>
+        <h3 class="ethics-title">Full Transparency</h3>
+        <p class="ethics-desc">Some links are Amazon affiliate links — meaning we earn a small commission if you buy through them. This <strong>never affects our ranking</strong> or which products we recommend.</p>
+      </div>
+      <div class="ethics-card">
+        <div class="ethics-icon"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" fill="none" stroke="#A16207" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h3 class="ethics-title">Verified Data Only</h3>
+        <p class="ethics-desc">Every price, spec, and rating we show is <strong>verified from the actual Amazon India listing</strong>. We don't inflate specs or hide real trade-offs. Prices are checked at the time of writing.</p>
+      </div>
+      <div class="ethics-card">
+        <div class="ethics-icon"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+        <h3 class="ethics-title">For Indian Shoppers</h3>
+        <p class="ethics-desc">We focus on products <strong>genuinely available in India</strong>, with after-sales support here. No global-only picks, no imports with no warranty. Every recommendation is Indian-market ready.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHECKLIST -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-eyebrow">Our Promise</div>
+      <h2 class="section-title">What you can always expect</h2>
+    </div>
+    <div class="checklist">
+      <div class="check-item">
+        <div class="check-icon"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+        <p class="check-text"><strong>Honest specifications:</strong> Every processor, RAM, storage, and display spec is checked against the official Amazon listing. No inflated or misleading claims.</p>
+      </div>
+      <div class="check-item">
+        <div class="check-icon"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+        <p class="check-text"><strong>Real prices:</strong> We show the current Amazon price and MRP, plus EMI options where available. Prices change — always check the live listing before buying.</p>
+      </div>
+      <div class="check-item">
+        <div class="check-icon"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+        <p class="check-text"><strong>No paid rankings:</strong> A brand can't buy their way to the top of a ShopMaze guide. Rankings are editorial decisions based on value.</p>
+      </div>
+      <div class="check-item">
+        <div class="check-icon"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+        <p class="check-text"><strong>Regular updates:</strong> Every guide is revisited periodically. Outdated picks get removed. New, better products get added.</p>
+      </div>
+      <div class="check-item">
+        <div class="check-icon"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+        <p class="check-text"><strong>Open to correction:</strong> If you spot an error, write to us. We correct mistakes transparently and update the guide.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- AUTHOR -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-eyebrow">Who's Behind ShopMaze</div>
+      <h2 class="section-title">Meet the team</h2>
+    </div>
+    <div class="author-card">
+      <div class="author-avatar">RD</div>
+      <div class="author-content">
+        <h3>Royal Dev</h3>
+        <div class="author-role">Founder & Lead Editor</div>
+        <p class="author-bio">Royal Dev is the founder of ShopMaze and has been researching consumer tech in India since 2024. He built ShopMaze to solve one problem: <strong>finding honest, well-researched buying guides for Indian budgets</strong> — without sponsored noise. Every guide on this site is personally reviewed by him before publishing.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-banner">
+    <h3>Ready to <span class="yellow">shop smart</span>?</h3>
+    <p>Browse our hand-picked guides — researched, verified, and honestly ranked.</p>
+    <div class="cta-buttons">
+      <a href="/laptops" class="cta-btn-primary">Browse Laptops →</a>
+      <a href="/desktops" class="cta-btn-secondary">Browse Desktops →</a>
+    </div>
+  </div>
+
+  <!-- SITEMAP -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-eyebrow">Site Map</div>
+      <h2 class="section-title">Every page on ShopMaze</h2>
+      <p class="section-desc">All our guides and categories — one place, easy to explore.</p>
+    </div>
+    <div class="sitemap-grid">
+
+      <div class="sitemap-col">
+        <div class="sitemap-col-title">Main Pages</div>
+        <ul class="sitemap-list">
+          <li><a href="/">Home</a></li>
+          <li><a href="/laptops">Laptops</a></li>
+          <li><a href="/desktops">Desktops</a></li>
+          <li><a href="/how-we-review/">How We Review</a></li>
+        </ul>
+      </div>
+
+      <div class="sitemap-col">
+        <div class="sitemap-col-title">Laptops · Budget</div>
+        <ul class="sitemap-list">
+          <li><a href="/laptops/best-laptop-under-15000">Under ₹15,000</a></li>
+          <li><a href="/laptops/best-laptop-under-20000">Under ₹20,000</a></li>
+          <li><a href="/laptops/best-laptop-under-30000">Under ₹30,000</a></li>
+          <li><a href="/laptops/best-laptop-under-40000">Under ₹40,000</a></li>
+          <li><a href="/laptops/best-laptop-under-50000">Under ₹50,000</a></li>
+          <li><a href="/laptops/best-laptop-under-60000">Under ₹60,000</a></li>
+          <li><a href="/laptops/best-laptop-under-70000">Under ₹70,000</a></li>
+          <li><a href="/laptops/best-laptop-under-80000">Under ₹80,000</a></li>
+          <li><a href="/laptops/best-laptop-under-90000">Under ₹90,000</a></li>
+          <li><a href="/laptops/best-laptop-under-100000">Under ₹1,00,000</a></li>
+        </ul>
+      </div>
+
+      <div class="sitemap-col">
+        <div class="sitemap-col-title">Laptops · Special</div>
+        <ul class="sitemap-list">
+          <li><a href="/laptops/premium-laptops">Premium Laptops</a></li>
+          <li><a href="/laptops/best-premium-laptops">Best Premium Laptops</a></li>
+          <li><a href="/laptops/most-affordable-laptops">Most Affordable Laptops</a></li>
+          <li><a href="/laptops/best-gaming-laptop-under-80000">Gaming Under ₹80,000</a></li>
+        </ul>
+      </div>
+
+      <div class="sitemap-col">
+        <div class="sitemap-col-title">Desktops</div>
+        <ul class="sitemap-list">
+          <li><a href="/desktops/best-gaming-pc-under-50000">Best Gaming PC Under ₹50,000</a></li>
+          <li><a href="/desktops/gaming-pc-under-30000">Gaming PC Under ₹30,000</a></li>
+        </ul>
+      </div>
+
+      <div class="sitemap-col">
+        <div class="sitemap-col-title">Trust & Legal</div>
+        <ul class="sitemap-list">
+          <li><a href="/how-we-review/">How We Review</a></li>
+          <li><a href="/privacy/">Privacy Policy</a></li>
+          <li><a href="/terms/">Terms of Use</a></li>
+          <li><a href="/disclaimer/">Disclaimer</a></li>
+          <li><a href="/contact/">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <div class="sitemap-col">
+        <div class="sitemap-col-title">Connect</div>
+        <ul class="sitemap-list">
+          <li><a href="mailto:sarkvission@gmail.com">Email Support</a></li>
+          <li><a href="https://wa.me/919104037184" target="_blank" rel="noopener">WhatsApp</a></li>
+          <li><a href="https://www.linkedin.com/in/royal-dev-131467383" target="_blank" rel="noopener">LinkedIn</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="sm-footer">
+  <div class="sm-footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="/"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 100" class="footer-logo-svg">
+          <g transform="translate(8, 22) scale(1.05)">
+            <path d="M7 29 H17 L24 14 L34 44 L41 23 L47 29 H53" fill="none" stroke="#1F2937" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="24" cy="14" r="4" fill="#EAB308"/>
+            <circle cx="34" cy="44" r="4" fill="#EAB308"/>
+          </g>
+          <text x="76" y="61" font-family="Arial Black, Arial" font-size="37" font-weight="900" letter-spacing="-1.2">
+            <tspan fill="#1F2937">Shop</tspan><tspan fill="#EAB308">Maze</tspan>
+          </text>
+          <text x="79" y="78" font-family="Arial" font-size="8" font-weight="700" letter-spacing="3" fill="#687386">ELECTRONICS</text>
+        </svg></a>
+        <p>Honest tech reviews and buying guides for Indian shoppers. No sponsored picks, no paid placements.</p>
+        <div class="footer-social">
+          <a href="https://wa.me/919104037184" target="_blank" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></a>
+          <a href="mailto:sarkvission@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></a>
+          <a href="https://www.linkedin.com/in/royal-dev-131467383" target="_blank" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Laptops</h4>
+        <ul>
+          <li><a href="/laptops">All Laptops</a></li>
+          <li><a href="/laptops/best-laptop-under-15000">Under ₹15,000</a></li>
+          <li><a href="/laptops/best-laptop-under-30000">Under ₹30,000</a></li>
+          <li><a href="/laptops/best-laptop-under-50000">Under ₹50,000</a></li>
+          <li><a href="/laptops/best-laptop-under-90000">Under ₹90,000</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Trust</h4>
+        <ul>
+          <li><a href="/how-we-review/">How We Review</a></li>
+          <li><a href="/privacy/">Privacy Policy</a></li>
+          <li><a href="/terms/">Terms of Use</a></li>
+          <li><a href="/disclaimer/">Disclaimer</a></li>
+          <li><a href="/contact/">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="mailto:sarkvission@gmail.com">Email</a></li>
+          <li><a href="https://wa.me/919104037184">WhatsApp</a></li>
+          <li><a href="/how-we-review/#sitemap">Site Map</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>&copy; 2026 ShopMaze. All rights reserved.</div>
+    </div>
+    <div class="amazon-disclosure">
+      <strong>Disclosure:</strong> As an Amazon Associate, ShopMaze earns from qualifying purchases. This does not affect our editorial recommendations.
+    </div>
+  </div>
+</footer>
+
+<!-- WHATSAPP -->
+<a href="https://wa.me/919104037184?text=Hi%2C%20I%20need%20help%20with%3A%20ShopMaze" class="whatsapp-float" id="whatsappFloat" target="_blank" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+</a>
+
+<script>
+(function() {
+  'use strict';
+  const header = document.getElementById('header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 8);
+  }, { passive: true });
+
+  const menuBtn = document.getElementById('menuBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  if (menuBtn && mobileMenu) {
+    menuBtn.addEventListener('click', () => { menuBtn.classList.toggle('open'); mobileMenu.classList.toggle('open'); });
+  }
+
+  const waFloat = document.getElementById('whatsappFloat');
+  let ticking = false;
+  function onScroll() {
+    if (window.scrollY < 100) waFloat.classList.add('visible'); else waFloat.classList.remove('visible');
+    ticking = false;
+  }
+  window.addEventListener('scroll', () => { if (!ticking) { window.requestAnimationFrame(onScroll); ticking = true; } }, { passive: true });
+  onScroll();
+})();
+</script>
+
+</body>
+</html>
